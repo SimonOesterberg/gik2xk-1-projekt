@@ -1,22 +1,22 @@
 {
   "development": {
     "username": "root",
-    "password": "Admin",
-    "database": "mySQL",
+    "password": "admin",
+    "database": "colordb",
     "host": "127.0.0.1",
     "dialect": "mysql"
   },
   "test": {
     "username": "root",
-    "password": "Admin",
-    "database": "mariaDB",
+    "password": "admin",
+    "database": "colordb",
     "host": "127.0.0.1",
     "dialect": "mysql"
   },
   "production": {
     "username": "root",
-    "password": "Admin",
-    "database": "",
+    "password": "admin",
+    "database": "colordb",
     "host": "127.0.0.1",
     "dialect": "mysql"
   }
