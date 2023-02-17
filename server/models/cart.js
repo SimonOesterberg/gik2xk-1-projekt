@@ -1,20 +1,17 @@
 module.exports = (sequelize, DataTypes) => {
-    return sequelize.define("color", {
+    return sequelize.define("cart", {
         id: {
             type: DataTypes.INTEGER,
             primaryKey: true,
             autoIncrement: true
         },
-        colorName: {
-            type: DataTypes.STRING(30),
+        total: {
+            type: DataTypes.FLOAT(30),
             allowNull: false
         },
-        rgbValue: {
-            type: DataTypes.STRING(16),
-            allowNull: false,
-            validate: {
-                len:[10, 16]
-            }
+        quantity: {
+            type: DataTypes.INTEGER(6),
+            allowNull: false
         }
     },
     {underscored: true}

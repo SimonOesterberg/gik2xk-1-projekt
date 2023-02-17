@@ -40,4 +40,30 @@ Object.keys(db).forEach(modelName => {
 db.sequelize = sequelize;
 db.Sequelize = Sequelize;
 
+//color id
+db.color.hasMany(db.product);
+db.product.belongsTo(db.color);
+
+//product id
+db.product.hasMany(db.uniqueProduct);
+db.uniqueProduct.belongsTo(db.product);
+
+db.product.hasOne(db.ratingList);
+db.ratingList.belongsTo(db.product);
+
+//uniqueProduct id
+db.cart.hasMany(db.uniqueProduct);
+db.uniqueProduct.belongsTo(db.cart);
+
+//user id
+db.user.hasOne(db.cart);
+db.cart.belongsTo(db.user);
+
+db.user.hasMany(db.rating);
+db.rating.belongsTo(db.user);
+
+//ratingList id
+db.ratingList.hasMany(db.rating);
+db.rating.belongsTo(db.ratingList);
+
 module.exports = db;
