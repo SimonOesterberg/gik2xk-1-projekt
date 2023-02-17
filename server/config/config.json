@@ -1,0 +1,23 @@
+{
+  "development": {
+    "username": "root",
+    "password": "Admin",
+    "database": "mySQL",
+    "host": "127.0.0.1",
+    "dialect": "mysql"
+  },
+  "test": {
+    "username": "root",
+    "password": "Admin",
+    "database": "mariaDB",
+    "host": "127.0.0.1",
+    "dialect": "mysql"
+  },
+  "production": {
+    "username": "root",
+    "password": "Admin",
+    "database": "",
+    "host": "127.0.0.1",
+    "dialect": "mysql"
+  }
+}
