@@ -5,13 +5,13 @@ module.exports = (sequelize, DataTypes) => {
             primaryKey: true,
             autoIncrement: true
         },
-        rating: {
+        score: {
             type: DataTypes.INTEGER(2),
             allowNull: false
         },
         description: {
-            type: DataTypes.TEXT,
-            allowNull: true
+            type: DataTypes.STRING(500),
+            allowNull: true,
         }
     },
     {underscored: true}

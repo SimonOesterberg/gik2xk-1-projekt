@@ -9,11 +9,25 @@ module.exports = (sequelize, DataTypes) => {
             type: DataTypes.STRING(30),
             allowNull: false
         },
+        ncsValue: {
+            type: DataTypes.STRING(15),
+            allowNull: false,
+            validate: {
+                len:[5, 15]
+            }
+        },
         rgbValue: {
             type: DataTypes.STRING(16),
             allowNull: false,
             validate: {
                 len:[10, 16]
+            }
+        },
+        hexValue: {
+            type: DataTypes.STRING(9),
+            allowNull: false,
+            validate: {
+                len:[4, 9]
             }
         }
     },
