@@ -39,6 +39,19 @@ async function getById(id){
     }
 }
 
+async function getUniqueProducts(id) {
+  
+    if (!id) {
+        return createResponseError(422, "ID cannot be empty");
+    }
+    try {
+        const allUniqueProducts = await db.uniqueProduct.findAll({where: {cartId: id}});
+        return createResponseSuccess(allUniqueProducts);
+    } catch(error){
+        return createResponseError(error.status, error.message);
+    }
+}
+
 async function getAll() {
     try {
         const allCarts = await db.cart.findAll();
@@ -47,6 +60,23 @@ async function getAll() {
         return createResponseError(error.status, error.message);
     }
 }
+
+async function addUniqueProduct(id, uniqueProductId) {
+  
+    if (!id) {
+        return createResponseError(422, "ID cannot be empty");
+    } try {
+        
+        const addedUniqueProduct = await db.uniqueProduct.update({cartId: id}, {
+            where: {id: uniqueProductId}
+        });
+
+        return createResponseSuccess(addedUniqueProduct);
+    } catch(error){
+        return createResponseError(error.status, error.message);
+    }
+}
+    
 
 async function create(cart) {
     const invalidData = validate(cart, constraints);
@@ -105,4 +135,4 @@ async function destroy(id) {
 
 }
 
-module.exports = {getById, getAll, create, update, destroy};
+module.exports = {getById, getUniqueProducts, getAll, addUniqueProduct, create, update, destroy};

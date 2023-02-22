@@ -3,7 +3,7 @@ const db = require("../models");
 const validate = require("validate.js");
 
 router.get('/:id/carts', (req, res) =>{
-    
+
 })
 
 const constraints = {

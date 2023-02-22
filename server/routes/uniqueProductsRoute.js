@@ -6,6 +6,10 @@ router.get('/:id/carts', (req, res) =>{
 
 })
 
+router.get('/:id', (req, res) =>{
+
+})
+
 
 validate.extend(validate.validators.datetime, {
     parse: function(value) {
