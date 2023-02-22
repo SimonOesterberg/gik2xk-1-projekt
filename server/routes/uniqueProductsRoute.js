@@ -2,6 +2,11 @@ const router = require("express").Router();
 const db = require("../models");
 const validate = require("validate.js");
 
+router.get('/:id/carts', (req, res) =>{
+
+})
+
+
 validate.extend(validate.validators.datetime, {
     parse: function(value) {
       return Date.parse(value);

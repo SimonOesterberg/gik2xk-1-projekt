@@ -41,29 +41,71 @@ db.sequelize = sequelize;
 db.Sequelize = Sequelize;
 
 //color id
-db.color.hasMany(db.product);
-db.product.belongsTo(db.color);
+db.color.hasMany(db.product, {
+  foreignKey: { allowNull: false },
+  onDelete: 'CASCADE'
+});
+db.product.belongsTo(db.color, {
+  foreignKey: {allowNull: false},
+  onDelete: 'CASCADE'
+});
 
 //product id
-db.product.hasMany(db.uniqueProduct);
-db.uniqueProduct.belongsTo(db.product);
+db.product.hasMany(db.uniqueProduct, {
+  foreignKey: { allowNull: false },
+  onDelete: 'CASCADE'
+});
+db.uniqueProduct.belongsTo(db.product, {
+  foreignKey: {allowNull: false},
+  onDelete: 'CASCADE'
+});
 
-db.product.hasOne(db.ratingList);
-db.ratingList.belongsTo(db.product);
+db.product.hasOne(db.ratingList, {
+  foreignKey: { allowNull: false },
+  onDelete: 'CASCADE'
+});
+db.ratingList.belongsTo(db.product, {
+  foreignKey: {allowNull: false},
+  onDelete: 'CASCADE'
+});
 
 //uniqueProduct id
-db.cart.hasMany(db.uniqueProduct);
-db.uniqueProduct.belongsTo(db.cart);
+db.cart.hasMany(db.uniqueProduct, {
+  foreignKey: { allowNull: false },
+  onDelete: 'CASCADE'
+});
+db.uniqueProduct.belongsTo(db.cart, {
+  foreignKey: {allowNull: false},
+  onDelete: 'CASCADE'
+});
 
 //user id
-db.user.hasOne(db.cart);
-db.cart.belongsTo(db.user);
+db.user.hasOne(db.cart, {
+  foreignKey: { allowNull: false },
+  onDelete: 'CASCADE'
+});
+db.cart.belongsTo(db.user, {
+  foreignKey: {allowNull: false},
+  onDelete: 'CASCADE'
+});
 
-db.user.hasMany(db.rating);
-db.rating.belongsTo(db.user);
+db.user.hasMany(db.rating, {
+  foreignKey: { allowNull: false },
+  onDelete: 'CASCADE'
+});
+db.rating.belongsTo(db.user, {
+  foreignKey: {allowNull: false},
+  onDelete: 'CASCADE'
+});
 
 //ratingList id
-db.ratingList.hasMany(db.rating);
-db.rating.belongsTo(db.ratingList);
+db.ratingList.hasMany(db.rating, {
+  foreignKey: { allowNull: false },
+  onDelete: 'CASCADE'
+});
+db.rating.belongsTo(db.ratingList, {
+  foreignKey: {allowNull: false},
+  onDelete: 'CASCADE'
+});
 
 module.exports = db;
