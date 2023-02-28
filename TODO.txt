@@ -1,0 +1,4 @@
+* Lägga till kategorier i models
+* Fixa så att servern inte kraschar om man saknar information
+*Lägga till funktion i productService för att hämta alla produkter under kategori
+*getByPrice i produkt
