@@ -7,26 +7,33 @@ const {
 const validate = require("validate.js");
 
 const constraints = {
-  total: {
+  userName: {
     length: {
+      minimum: 4,
       maximum: 30,
-      tooLong:
-        "^This is very prizy, contact us at email@mail.com to make this order!",
-    },
-    numericality: {
-      greaterThan: 0,
-      notGreaterThan:
-        "^Cannot checkout with cart totaling to less than %{count} dollars!",
-      notValid: "^Total has to be a number!",
+      tooShort: "^Username has to be at least %{count} letters long!",
+      tooLong: "^Username cannot be longer than %{count} letters long!",
     },
   },
-  quantity: {
-    numericality: {
-      greaterThan: 0,
-      lessThan: 999999,
-      notGreaterThan: "^quantity has to be higher than %{count}!",
-      notLessThan: "^quantity has to be lower than %{count}!",
-      notValid: "^quantity has to be a number!",
+  firstName: {
+    length: {
+      minimum: 2,
+      maximum: 30,
+      tooShort: "^First name has to be at least %{count} letters long!",
+      tooLong: "^First name cannot be longer than %{count} letters long!",
+    },
+  },
+  lastName: {
+    length: {
+      minimum: 2,
+      maximum: 30,
+      tooShort: "^Last name has to be at least %{count} letters long!",
+      tooLong: "^Last name cannot be longer than %{count} letters long!",
+    },
+  },
+  email: {
+    email: {
+      message: "^This is not a valid email example@mail.com",
     },
   },
 };
@@ -36,11 +43,11 @@ async function getById(id) {
     return createResponseError(422, "ID cannot be empty");
   }
   try {
-    const allCarts = await db.cart.findOne({
+    const allUsers = await db.user.findOne({
       where: { id },
-      include: [{ model: db.uniqueProduct, include: [db.product] }],
+      include: [{ model: db.rating }],
     });
-    return createResponseSuccess(allCarts);
+    return createResponseSuccess(allUsers);
   } catch (error) {
     return createResponseError(error.status, error.message);
   }
@@ -48,8 +55,8 @@ async function getById(id) {
 
 async function getAll() {
   try {
-    const allCarts = await db.cart.findAll();
-    return createResponseSuccess(allCarts);
+    const allusers = await db.user.findAll();
+    return createResponseSuccess(allusers);
   } catch (error) {
     return createResponseError(error.status, error.message);
   }
@@ -61,7 +68,7 @@ async function addUniqueProduct(id, uniqueProductId) {
   }
   try {
     const addedUniqueProduct = await db.uniqueProduct.update(
-      { cartId: id },
+      { userId: id },
       {
         where: { id: uniqueProductId },
       }
@@ -73,29 +80,29 @@ async function addUniqueProduct(id, uniqueProductId) {
   }
 }
 
-async function create(cart) {
-  const invalidData = validate(cart, constraints);
-  const quantity = cart.quantity;
-  const total = cart.total;
-  if (!quantity) {
-    return createResponseError(422, "Quantity cannot be empty!");
+async function create(user) {
+  const invalidData = validate(user, constraints);
+  const userName = user.userName;
+  const email = user.email;
+  if (!userName) {
+    return createResponseError(422, "userName cannot be empty!");
   }
-  if (!total) {
-    return createResponseError(422, "Total cannot be empty!");
+  if (!email) {
+    return createResponseError(422, "email cannot be empty!");
   }
   if (invalidData) {
     return createResponseError(422, invalidData);
   }
   try {
-    const newCart = await db.cart.create(cart);
-    return createResponseSuccess(newCart);
+    const newUser = await db.user.create(user);
+    return createResponseSuccess(newUser);
   } catch (error) {
     return createResponseError(error.status, error.message);
   }
 }
 
-async function update(cart, id) {
-  const invalidData = validate(cart, constraints);
+async function update(user, id) {
+  const invalidData = validate(user, constraints);
 
   if (!id) {
     return createResponseError(422, "ID is necessary when updating");
@@ -104,10 +111,10 @@ async function update(cart, id) {
     return createResponseError(422, invalidData);
   }
   try {
-    await db.cart.update(cart, {
+    await db.user.update(user, {
       where: { id },
     });
-    return createResponseMessage(200, "The cart was updated");
+    return createResponseMessage(200, "The user was updated");
   } catch (error) {
     return createResponseError(error.status, error.message);
   }
@@ -118,10 +125,10 @@ async function destroy(id) {
     return createResponseError(422, "ID is necessary when updating");
   }
   try {
-    await db.cart.destroy({
+    await db.user.destroy({
       where: { id },
     });
-    return createResponseMessage(200, "The cart was destroyed");
+    return createResponseMessage(200, "The user was destroyed");
   } catch (error) {
     return createResponseError(error.status, error.message);
   }

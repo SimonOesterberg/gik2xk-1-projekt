@@ -9,14 +9,6 @@ router.get("/:id", (req, res) => {
   });
 });
 
-router.get("/:id/getUniqueProducts", (req, res) => {
-  const id = req.params.id;
-
-  cartService.getUniqueProducts(id).then((result) => {
-    res.status(result.status).json(result.data);
-  });
-});
-
 router.post("/:id/addUniqueProduct/:uniqueProductId", (req, res) => {
   const uniqueProductId = req.params.uniqueProductId;
   const id = req.params.id;

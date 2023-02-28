@@ -81,11 +81,11 @@ db.cart.hasMany(db.uniqueProduct);
 db.uniqueProduct.belongsTo(db.cart);
 
 //user id
-db.cart.hasOne(db.user, {
+db.user.hasOne(db.cart, {
   foreignKey: { allowNull: false },
   onDelete: "CASCADE",
 });
-db.user.belongsTo(db.cart, {
+db.cart.belongsTo(db.user, {
   foreignKey: { allowNull: false },
   onDelete: "CASCADE",
 });

@@ -7,7 +7,7 @@ module.exports = (sequelize, DataTypes) => {
         primaryKey: true,
         autoIncrement: true,
       },
-      avarageScore: {
+      averageScore: {
         type: DataTypes.FLOAT(2),
         allowNull: false,
       },

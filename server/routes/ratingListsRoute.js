@@ -23,9 +23,9 @@ router.get("/", (req, res) => {
 router.post("/", (req, res) => {
   const ratingList = req.body;
   const invalidData = validate(ratingList, constraints);
-  const averageScore = ratingList.ratingListName;
+  const averageScore = ratingList.averageScore;
 
-  if (invalidData || !avarageScore) {
+  if (invalidData || !averageScore) {
     res.status(400).json(invalidData || "Average score cannot be null!");
   } else {
     db.ratingList.create(ratingList).then((result) => {
