@@ -2,59 +2,58 @@ const router = require("express").Router();
 const cartService = require("../services/cartService");
 
 router.get("/:id", (req, res) => {
-    const id = req.params.id;
+  const id = req.params.id;
 
-    cartService.getById(id).then((result) => {
-        res.status(result.status).json(result.data);
-    });
-})
+  cartService.getById(id).then((result) => {
+    res.status(result.status).json(result.data);
+  });
+});
 
 router.get("/:id/getUniqueProducts", (req, res) => {
-    const id = req.params.id;
-    
-    cartService.getUniqueProducts(id).then((result) => {
-        res.status(result.status).json(result.data);
-    });
+  const id = req.params.id;
+
+  cartService.getUniqueProducts(id).then((result) => {
+    res.status(result.status).json(result.data);
+  });
 });
 
 router.post("/:id/addUniqueProduct/:uniqueProductId", (req, res) => {
-    const uniqueProductId = req.params.uniqueProductId;
-    const id = req.params.id;
-    
-    cartService.addUniqueProduct(id, uniqueProductId).then((result) => {
-        res.status(result.status).json(result.data);
-    });
+  const uniqueProductId = req.params.uniqueProductId;
+  const id = req.params.id;
+
+  cartService.addUniqueProduct(id, uniqueProductId).then((result) => {
+    res.status(result.status).json(result.data);
+  });
 });
 
-
-router.get("/",(req, res) => {
-    cartService.getAll().then((result) => {
-        res.status(result.status).json(result.data);
-    });
+router.get("/", (req, res) => {
+  cartService.getAll().then((result) => {
+    res.status(result.status).json(result.data);
+  });
 });
 
-router.post("/",(req, res) => {
-    const cart = req.body;
-    cartService.create(cart).then((result) => {
-        res.status(result.status).json(result.data);
-    });
+router.post("/", (req, res) => {
+  const cart = req.body;
+  cartService.create(cart).then((result) => {
+    res.status(result.status).json(result.data);
+  });
 });
 
-router.put("/",(req, res) => {
-    const cart = req.body;
-    const id = cart.id;
+router.put("/", (req, res) => {
+  const cart = req.body;
+  const id = cart.id;
 
-    cartService.update(cart, id).then((result) => {
-        res.status(result.status).json(result.data);
-    });
+  cartService.update(cart, id).then((result) => {
+    res.status(result.status).json(result.data);
+  });
 });
 
-router.delete("/",(req, res) => {
-    const id = req.body.id;
+router.delete("/", (req, res) => {
+  const id = req.body.id;
 
-    cartService.destroy(id).then((result) => {
-        res.status(result.status).json(result.data);
-    });
+  cartService.destroy(id).then((result) => {
+    res.status(result.status).json(result.data);
+  });
 });
 
 module.exports = router;
