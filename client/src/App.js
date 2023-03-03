@@ -1,4 +1,11 @@
 import "./App.css";
+import { Routes, Route, Link } from "react-router-dom";
+import Home from "./views/Home";
+import Cart from "./views/Cart";
+import ProductDetail from "./views/ProductDetail";
+import Products from "./views/Products";
+import User from "./views/User";
+
 import { styled, alpha } from "@mui/material/styles";
 import AppBar from "@mui/material/AppBar";
 import Box from "@mui/material/Box";
@@ -9,6 +16,26 @@ import InputBase from "@mui/material/InputBase";
 import MenuIcon from "@mui/icons-material/Menu";
 import SearchIcon from "@mui/icons-material/Search";
 import ShoppingCartIcon from "@mui/icons-material/ShoppingCart";
+import PersonIcon from "@mui/icons-material/Person";
+
+import { createTheme } from "@mui/material/styles";
+
+const theme = createTheme({
+  palette: {
+    primary: {
+      light: "#000000",
+      main: "#000000",
+      dark: "#00000",
+      contrastText: "#212",
+    },
+    secondary: {
+      light: "#ff7961",
+      main: "#f44336",
+      dark: "#ba000d",
+      contrastText: "#000",
+    },
+  },
+});
 
 const Search = styled("div")(({ theme }) => ({
   position: "relative",
@@ -84,10 +111,31 @@ function App() {
                 inputProps={{ "aria-label": "search" }}
               />
             </Search>
-            <ShoppingCartIcon />
+            <IconButton aria-label="Go to profile">
+              <Link to="/User">
+                <PersonIcon />
+              </Link>
+            </IconButton>
+            <IconButton aria-label="Go to shopping cart">
+              <Link to="/Cart">
+                <ShoppingCartIcon />
+              </Link>
+            </IconButton>
           </Toolbar>
         </AppBar>
       </Box>
+      <div>
+        <Routes>
+          <Route path="/" element={<Home></Home>}></Route>
+          <Route path="/User" element={<User></User>}></Route>
+          <Route path="/Cart" element={<Cart></Cart>}></Route>
+          <Route path="/Products" element={<Products></Products>}></Route>
+          <Route
+            path="/ProductDetail"
+            element={<ProductDetail></ProductDetail>}
+          ></Route>
+        </Routes>
+      </div>
     </div>
   );
 }
