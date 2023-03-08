@@ -66,7 +66,7 @@ function App() {
     <div className="App">
       <Box sx={{ flexGrow: 1 }}>
         <AppBar position="static">
-          <Toolbar>
+          <Toolbar className="App__toolbar">
             <IconButton
               size="large"
               edge="start"
@@ -74,7 +74,9 @@ function App() {
               aria-label="open drawer"
               sx={{ mr: 2 }}
             >
-              <MenuIcon />
+              <Link to="/Products">
+                <MenuIcon />
+              </Link>
             </IconButton>
 
             <Typography
@@ -85,10 +87,6 @@ function App() {
             >
               <Link to="/">Color Shop</Link>
             </Typography>
-
-            <Link to="/Products">
-              <Typography>Products</Typography>
-            </Link>
 
             <Search>
               <SearchIconWrapper>

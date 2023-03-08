@@ -1,4 +1,3 @@
-* Lägga till kategorier i models
-* Fixa så att servern inte kraschar om man saknar information
-*Lägga till funktion i productService för att hämta alla produkter under kategori
-*getByPrice i produkt
+-Fixa productListLarge så den lägger sig över hela sidan och inte ovanpå
+-Lyssna klart på lektion 5 del 3 52s in
+-Gör klart resten!

@@ -1,4 +1,4 @@
-import { Rating, Typography, Box } from "@mui/material";
+import { Rating, Typography, Box, TextField } from "@mui/material";
 import Grid from "@mui/material/Grid";
 import "./ProductDetail.css";
 
@@ -52,6 +52,18 @@ export default function ProductDetail() {
           <Typography variant="h4" component="h3">
             Ratings
           </Typography>
+          <Grid item xs={1}>
+            <img
+              width={"100%"}
+              src="https://www.seekpng.com/png/detail/297-2978586_rono-daniel-empty-profile-picture-icon.png"
+              alt="Profile"
+            ></img>
+          </Grid>
+          <Grid item xs={5}>
+            <Box component="form" noValidate autoComplete="off">
+              <TextField label="Write a review" variant="outlined" multiline />
+            </Box>
+          </Grid>
         </Box>
       </Grid>
     </Grid>

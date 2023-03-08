@@ -5,7 +5,7 @@ import "./Products.css";
 
 function Products() {
   return (
-    <Grid container columnSpacing={1} rowSpacing={1} className="Home">
+    <Grid container columnSpacing={1} rowSpacing={1} className="Grid">
       <Grid className="Grid__item" item xs={12} md={12}>
         <Box>
           <ProductListLarge className="ProductList"></ProductListLarge>
