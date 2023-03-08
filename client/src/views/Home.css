@@ -1,0 +1,39 @@
+
+
+.Home__img {
+    position: relative;
+    z-index: -1;
+    background-image: url("https://images.staticjw.com/mal/6327/malarfarg.jpg");
+    background-size: cover;
+    background-position: center;
+    height: 40vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: white;
+    text-shadow: 1px 1px 2px black;
+    font-size: larger;
+    font-weight: light;
+    border-bottom: 2px solid #2b2b2a;
+    box-shadow: 0px 0px 40px 15px rgba(0,0,0,0.53) inset, 0px 0px 20px 15px rgba(0,0,0,0.53);
+    -webkit-box-shadow: 0px 0px 40px 15px rgba(0,0,0,0.53) inset, 0px 0px 20px 15px rgba(0,0,0,0.53);
+    -moz-box-shadow: 0px 0px 40px 15px rgba(0,0,0,0.53) inset, 0px 0px 20px 15px rgba(0,0,0,0.53);
+}
+
+.Header{
+    text-align: center;
+    
+}
+
+.Grid__item {
+    border: solid 1px black;
+    display: flex;
+    justify-content: center;
+}
+
+.ProductList {
+    box-shadow: 0px 0px 0px 5px rgba(0,0,0,0.75);
+    -webkit-box-shadow: 0px 0px 20px 5px rgba(0,0,0,0.75);
+    -moz-box-shadow: 0px 0px 20px 5px rgba(0,0,0,0.75);
+    border: 2px solid rgba(0,0,0,0.75);
+}
