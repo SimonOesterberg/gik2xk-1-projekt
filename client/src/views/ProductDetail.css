@@ -1,0 +1,30 @@
+.Grid {
+    padding: 5%;
+}
+
+.ProductDetail__image-container {
+    height: 50vh;
+    aspect-ratio: 1/1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    box-shadow: 0px 0px 5px 5px rgba(0,0,0,0.10);
+    -webkit-box-shadow: 0px 0px 5px 5px rgba(0,0,0,0.10);
+    -moz-box-shadow: 0px 0px 5px 5px rgba(0,0,0,0.10);
+    border: 2px solid rgba(0,0,0,0.25);
+    border-radius: 10px;
+    -webkit-border-radius: 10px;
+    -moz-border-radius: 10px;
+    -ms-border-radius: 10px;
+    -o-border-radius: 10px;
+}
+
+.ProductDetail__image-container img {
+    max-height: 100%;
+    max-width: 100%;
+}
+
+.ProductDetail__basic-info-container {
+    padding-left: 5%;
+}

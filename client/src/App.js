@@ -17,25 +17,7 @@ import MenuIcon from "@mui/icons-material/Menu";
 import SearchIcon from "@mui/icons-material/Search";
 import ShoppingCartIcon from "@mui/icons-material/ShoppingCart";
 import PersonIcon from "@mui/icons-material/Person";
-
-import { createTheme } from "@mui/material/styles";
-
-const theme = createTheme({
-  palette: {
-    primary: {
-      light: "#000000",
-      main: "#000000",
-      dark: "#00000",
-      contrastText: "#212",
-    },
-    secondary: {
-      light: "#ff7961",
-      main: "#f44336",
-      dark: "#ba000d",
-      contrastText: "#000",
-    },
-  },
-});
+import StarIcon from "@mui/icons-material/Star";
 
 const Search = styled("div")(({ theme }) => ({
   position: "relative",
@@ -94,14 +76,20 @@ function App() {
             >
               <MenuIcon />
             </IconButton>
+
             <Typography
               variant="h6"
               noWrap
               component="div"
               sx={{ flexGrow: 1, display: { xs: "none", sm: "block" } }}
             >
-              Color Shop
+              <Link to="/">Color Shop</Link>
             </Typography>
+
+            <Link to="/Products">
+              <Typography>Products</Typography>
+            </Link>
+
             <Search>
               <SearchIconWrapper>
                 <SearchIcon />
@@ -111,11 +99,23 @@ function App() {
                 inputProps={{ "aria-label": "search" }}
               />
             </Search>
-            <IconButton aria-label="Go to profile">
+
+            <Link to="/ProductDetail">
+              <Typography>Detail</Typography>
+            </Link>
+
+            <IconButton sx={{ color: "white" }} aria-label={"Go to profile"}>
               <Link to="/User">
                 <PersonIcon />
               </Link>
             </IconButton>
+
+            <IconButton sx={{ color: "white" }} aria-label={`Wishlist`}>
+              <Link to="/">
+                <StarIcon />
+              </Link>
+            </IconButton>
+
             <IconButton aria-label="Go to shopping cart">
               <Link to="/Cart">
                 <ShoppingCartIcon />
