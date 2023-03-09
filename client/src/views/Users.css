@@ -1,0 +1,29 @@
+.Box__User{
+    display: flex;
+    width: 100%;
+    justify-content: center;
+    padding-top: 2rem;
+}
+
+.User__Grid--container{
+    
+    width: 45%;
+    background-color: rgba(169, 175, 175, 0.293);
+}
+
+.Grid__User{
+    padding: 2rem;
+
+}
+
+.Box__User--image{
+    width: 4rem;
+    height: 4rem;
+}
+
+.btn{
+    border: solid 1px black;
+    width: 2rem;
+    height: 2rem;
+}
+

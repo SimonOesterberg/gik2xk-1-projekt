@@ -1,0 +1,11 @@
+.Wishlist__box{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+}
+
+.Wishlist__box--container{
+    width: 40%;
+    height: 100%;
+}

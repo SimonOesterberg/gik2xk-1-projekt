@@ -11,7 +11,7 @@ export default function ProductListLarge() {
         transform: "translateZ(0)",
       }}
       rowHeight={200}
-      gap={1}
+      gap={5}
       cols={5}
     >
       {itemData.map((item) => {

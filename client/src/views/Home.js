@@ -18,7 +18,7 @@ function Home() {
           <Typography className="Header" variant="h4" component="h2">
             Popular
           </Typography>
-          <ProductListSmall className="ProductList"></ProductListSmall>
+          <ProductListSmall></ProductListSmall>
         </Box>
       </Grid>
       <Grid className="Grid__item" item xs={12} md={6}>
@@ -26,7 +26,7 @@ function Home() {
           <Typography className="Header" variant="h4" component="h2">
             Recommended
           </Typography>
-          <ProductListSmall className="ProductList"></ProductListSmall>
+          <ProductListSmall></ProductListSmall>
         </Box>
       </Grid>
     </Grid>

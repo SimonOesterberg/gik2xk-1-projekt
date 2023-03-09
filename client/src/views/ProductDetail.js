@@ -1,18 +1,50 @@
-import { Rating, Typography, Box, TextField } from "@mui/material";
+import { Rating, Typography, Box, TextField, Button } from "@mui/material";
 import Grid from "@mui/material/Grid";
 import "./ProductDetail.css";
+import LocalShippingIcon from "@mui/icons-material/LocalShipping";
+import InventoryIcon from "@mui/icons-material/Inventory";
+import FactoryIcon from "@mui/icons-material/Factory";
+import ProductRating from "../components/ProductRating";
 
 const productData = {
   name: "Fin Färg",
   averageRating: 7,
   manufacturer: "Tomas Kvist AB",
+  manufacturer_logo:
+    "https://www.borgunda.se/wp-content/uploads/2014/08/Falu-R%C3%B6df%C3%A4rg-logga.jpg",
   description: "Väldigt rolig och bra färg för alla miljöer!",
   ratings: 23,
+  price: 200,
+  profile_pic:
+    "https://th.bing.com/th/id/OIP.8bLU1tvPgHVMJ4ZKSrbN2wHaHa?pid=ImgDet&rs=1",
+  stock: 386,
+  userName: "My Username",
+  reviews: [
+    {
+      profile_pic:
+        "https://th.bing.com/th/id/OIP.8bLU1tvPgHVMJ4ZKSrbN2wHaHa?pid=ImgDet&rs=1",
+      reviewText: "Riktigt dålig produkt! Kommer aldrig köpa igen!",
+      reviewUser: "Päär Dukan",
+      reviewRating: 3,
+    },
+    {
+      profile_pic:
+        "https://th.bing.com/th/id/OIP.8bLU1tvPgHVMJ4ZKSrbN2wHaHa?pid=ImgDet&rs=1",
+      reviewText: "Toppen",
+      reviewUser: "Jag Hetersson",
+      reviewRating: 9,
+    },
+  ],
 };
 
 export default function ProductDetail() {
   return (
-    <Grid container columnSpacing={2} rowSpacing={2} className="Grid">
+    <Grid
+      container
+      columnSpacing={5}
+      rowSpacing={2}
+      className="ProductDetail__grid"
+    >
       <Grid item xs={6}>
         <Box className="ProductDetail__image-container">
           <img
@@ -35,10 +67,45 @@ export default function ProductDetail() {
             />
             ({productData.ratings})
           </Typography>
+          <Typography variant="h5" component="p">
+            {productData.price} kr
+          </Typography>
+          <Box className="ProductDetail__basic-info">
+            <FactoryIcon></FactoryIcon>
+            <Typography variant="h6" component="p">
+              &nbsp;Manufacturer:&nbsp;
+            </Typography>
+            <Typography variant="string" component="p">
+              {productData.manufacturer}&nbsp;
+            </Typography>
+            <img
+              height={"100%"}
+              src={productData.manufacturer_logo}
+              alt="Manufacturer logo"
+            ></img>
+          </Box>
+          <Box className="ProductDetail__basic-info">
+            <LocalShippingIcon></LocalShippingIcon>
+            <Typography variant="h6" component="p">
+              &nbsp;Delivery:&nbsp;
+            </Typography>
+            <Typography variant="string" component="p">
+              3-5 Work Days
+            </Typography>
+          </Box>
+          <Box className="ProductDetail__basic-info">
+            <InventoryIcon></InventoryIcon>
+            <Typography variant="h6" component="p">
+              &nbsp;In Stock:&nbsp;
+            </Typography>
+            <Typography variant="string" component="p">
+              {productData.stock}
+            </Typography>
+          </Box>
         </Box>
       </Grid>
-      <Grid item xs={12}>
-        <Box className="ProductDetail__bottom-container">
+      <Grid item xs={6}>
+        <Box className="Bottom-container">
           <Typography variant="h4" component="h3">
             Description
           </Typography>
@@ -47,23 +114,51 @@ export default function ProductDetail() {
           </Typography>
         </Box>
       </Grid>
-      <Grid item xs={12}>
-        <Box className="ProductDetail__ratings-container">
+      <Grid item xs={6}>
+        <Box className="Bottom-container">
           <Typography variant="h4" component="h3">
-            Ratings
+            Add a rating
           </Typography>
-          <Grid item xs={1}>
-            <img
-              width={"100%"}
-              src="https://www.seekpng.com/png/detail/297-2978586_rono-daniel-empty-profile-picture-icon.png"
-              alt="Profile"
-            ></img>
-          </Grid>
-          <Grid item xs={5}>
-            <Box component="form" noValidate autoComplete="off">
-              <TextField label="Write a review" variant="outlined" multiline />
+          <Box className="Rating__container">
+            <Box className="Rating__header">
+              <Grid className="Rating__image-container" item xs={6}>
+                <img
+                  className="Rating__image"
+                  src={productData.profile_pic}
+                  alt="Profile"
+                ></img>
+                <Typography variant="string" component="p">
+                  {productData.userName}
+                </Typography>
+              </Grid>
+              <Grid item xs={6} className="Rating__stars">
+                <Rating name="newRating" precision={0.5} />
+              </Grid>
             </Box>
-          </Grid>
+            <Box component="form" noValidate autoComplete="off">
+              <TextField
+                label="Write a review"
+                variant="outlined"
+                multiline
+                className="Rating__textfield"
+              />
+            </Box>
+            <Box className="Rating__submit-container">
+              <Button variant="contained">Submit</Button>
+            </Box>
+          </Box>
+          <Typography
+            className="UserRatings__header"
+            variant="h4"
+            component="h3"
+          >
+            User Ratings
+          </Typography>
+          <ul className="UserRatings__List">
+            {productData.reviews.map((review) => {
+              return <ProductRating review={review} />;
+            })}
+          </ul>
         </Box>
       </Grid>
     </Grid>

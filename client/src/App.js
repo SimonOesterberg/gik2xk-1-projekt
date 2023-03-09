@@ -5,6 +5,7 @@ import Cart from "./views/Cart";
 import ProductDetail from "./views/ProductDetail";
 import Products from "./views/Products";
 import User from "./views/User";
+import Wishlist from "./views/Wishlist";
 
 import { styled, alpha } from "@mui/material/styles";
 import AppBar from "@mui/material/AppBar";
@@ -70,7 +71,7 @@ function App() {
             <IconButton
               size="large"
               edge="start"
-              color="inherit"
+              color="white"
               aria-label="open drawer"
               sx={{ mr: 2 }}
             >
@@ -98,24 +99,24 @@ function App() {
               />
             </Search>
 
-            <Link to="/ProductDetail">
+            <Link to="/Product/1">
               <Typography>Detail</Typography>
             </Link>
 
             <IconButton sx={{ color: "white" }} aria-label={"Go to profile"}>
-              <Link to="/User">
+              <Link to="/User/1">
                 <PersonIcon />
               </Link>
             </IconButton>
 
             <IconButton sx={{ color: "white" }} aria-label={`Wishlist`}>
-              <Link to="/">
+              <Link to="/Wishlist/1">
                 <StarIcon />
               </Link>
             </IconButton>
 
             <IconButton aria-label="Go to shopping cart">
-              <Link to="/Cart">
+              <Link to="/Cart/1">
                 <ShoppingCartIcon />
               </Link>
             </IconButton>
@@ -124,12 +125,18 @@ function App() {
       </Box>
       <div>
         <Routes>
-          <Route path="/" element={<Home></Home>}></Route>
-          <Route path="/User" element={<User></User>}></Route>
-          <Route path="/Cart" element={<Cart></Cart>}></Route>
-          <Route path="/Products" element={<Products></Products>}></Route>
+          <Route exact path="/" element={<Home></Home>}></Route>
+          <Route exact path="/User/:id" element={<User></User>}></Route>
+          <Route exact path="/Cart/:id" element={<Cart></Cart>}></Route>
+          <Route exact path="/Products" element={<Products></Products>}></Route>
           <Route
-            path="/ProductDetail"
+            exact
+            path="/Wishlist/:id"
+            element={<Wishlist></Wishlist>}
+          ></Route>
+          <Route
+            exact
+            path="/Product/:id"
             element={<ProductDetail></ProductDetail>}
           ></Route>
         </Routes>

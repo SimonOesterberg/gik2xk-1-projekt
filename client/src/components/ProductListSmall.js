@@ -5,7 +5,7 @@ import ProductListItem from "./ProductListItem";
 export default function ProductListSmall() {
   return (
     <ImageList
-      className="ProductList"
+      className="ProductListSmall"
       sx={{
         // Promote the list into its own layer in Chrome. This costs memory, but helps keeping high FPS.
         transform: "translateZ(0)",

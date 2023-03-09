@@ -3,9 +3,8 @@ html {
 }
 
 
-
-
-
-
-
-
+.Grid__Product{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}

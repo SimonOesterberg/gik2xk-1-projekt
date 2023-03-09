@@ -1,0 +1,48 @@
+.Cart__grid {
+    padding: 5%;
+}
+
+.CartList {
+    list-style: none;
+    padding: 0;
+}
+
+.Cart__main-container {
+    padding: 5%;
+    background-color: rgb(250, 250, 250);
+    box-shadow: 0 0 10px 0 rgba(0,0,0,0.25) inset;
+    -webkit-box-shadow: 0 0 10px 0 rgba(0,0,0,0.25) inset;
+    -moz-box-shadow: 0 0 10px 0 rgba(0,0,0,0.25) inset;
+    border-radius: 10px;
+    -webkit-border-radius: 10px;
+    -moz-border-radius: 10px;
+    -ms-border-radius: 10px;
+    -o-border-radius: 10px;
+    margin-bottom: 2rem;
+}
+
+.CartList__item {
+    background-color: white;
+    margin-bottom: 1rem;
+    width: 100%;
+    border: 2px solid #dddddd;
+    border-radius: 5px;
+    padding: 2% 3%;
+    box-sizing: border-box;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.CartList__item-right {
+    display: flex;
+    align-items: center;
+}
+
+.CartList__item-amount {
+    height: 2rem;
+    aspect-ratio: 1/1;
+    border: 2px solid #dddddd;
+    border-radius: 5px;
+    text-align: center;
+}
