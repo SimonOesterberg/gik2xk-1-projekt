@@ -54,13 +54,11 @@ db.color.hasMany(db.product, {
 });
 db.product.belongsTo(db.color, {
   foreignKey: { allowNull: false },
-  onDelete: "CASCADE",
 });
 
 //product id
 db.product.hasMany(db.uniqueProduct, {
   foreignKey: { allowNull: false },
-  onDelete: "CASCADE",
 });
 db.uniqueProduct.belongsTo(db.product, {
   foreignKey: { allowNull: false },
@@ -73,7 +71,6 @@ db.product.hasOne(db.ratingList, {
 });
 db.ratingList.belongsTo(db.product, {
   foreignKey: { allowNull: false },
-  onDelete: "CASCADE",
 });
 
 //uniqueProduct id
@@ -87,12 +84,10 @@ db.user.hasOne(db.cart, {
 });
 db.cart.belongsTo(db.user, {
   foreignKey: { allowNull: false },
-  onDelete: "CASCADE",
 });
 
 db.user.hasMany(db.rating, {
   foreignKey: { allowNull: false },
-  onDelete: "CASCADE",
 });
 db.rating.belongsTo(db.user, {
   foreignKey: { allowNull: false },
@@ -106,7 +101,15 @@ db.ratingList.hasMany(db.rating, {
 });
 db.rating.belongsTo(db.ratingList, {
   foreignKey: { allowNull: false },
+});
+
+//manufacturer id
+db.manufacturer.hasMany(db.product, {
+  foreignKey: { allowNull: false },
   onDelete: "CASCADE",
+});
+db.product.belongsTo(db.manufacturer, {
+  foreignKey: { allowNull: false },
 });
 
 module.exports = db;

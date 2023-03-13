@@ -17,5 +17,6 @@ app.use("/ratings", require("./routes/ratingsRoute.js"));
 app.use("/ratingLists", require("./routes/ratingListsRoute.js"));
 app.use("/uniqueProducts", require("./routes/uniqueProductsRoute.js"));
 app.use("/products", require("./routes/productsRoute.js"));
+app.use("/manufacturers", require("./routes/manufacturersRoute.js"));
 
 module.exports = app;

@@ -21,6 +21,7 @@ export default function RangeSlider() {
         onChange={handleChange}
         valueLabelDisplay="auto"
         getAriaValueText={valuetext}
+        max={1000}
       />
     </Box>
   );

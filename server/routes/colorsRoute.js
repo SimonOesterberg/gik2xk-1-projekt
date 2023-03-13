@@ -48,14 +48,12 @@ router.post("/", (req, res) => {
   const colorName = color.colorName;
   const ncsValue = color.ncsValue;
 
-  if (invalidData || !colorName || !ncsValue) {
-    res
-      .status(400)
-      .json(
-        invalidData ||
-          "Color name cannot be null!" ||
-          "NCS value cannot be null!"
-      );
+  if (invalidData) {
+    res.status(400).json(invalidData);
+  } else if (!colorName) {
+    res.status(400).json("Color name cannot be null!");
+  } else if (!ncsValue) {
+    res.status(400).json("NCS value cannot be null!");
   } else {
     color.rgbValue = ncsColor.rgb(ncsValue);
     color.hexValue = ncsColor.hex(ncsValue);
@@ -96,7 +94,7 @@ router.delete("/", (req, res) => {
       where: { id: req.body.id },
     })
     .then((result) => {
-      res.json("Color was removed!");
+      res.json("Color was destroyed");
     });
 });
 
