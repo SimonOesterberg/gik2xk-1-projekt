@@ -1,0 +1,21 @@
+.CreateProduct__grid {
+    padding: 5%;
+}
+
+.Form__container {
+    background-color: #fcfcfc;
+    padding: 5%;
+    background-color: rgb(250, 250, 250);
+    box-shadow: 0 0 10px 0 rgba(0,0,0,0.25) inset;
+    -webkit-box-shadow: 0 0 10px 0 rgba(0,0,0,0.25) inset;
+    -moz-box-shadow: 0 0 10px 0 rgba(0,0,0,0.25) inset;
+    border-radius: 10px;
+    -webkit-border-radius: 10px;
+    -moz-border-radius: 10px;
+    -ms-border-radius: 10px;
+    -o-border-radius: 10px;
+}
+
+.Form__tf {
+    box-sizing: border-box;
+}

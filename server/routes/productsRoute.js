@@ -9,6 +9,14 @@ router.get("/:id", (req, res) => {
   });
 });
 
+router.get("/manufacturer/:id", (req, res) => {
+  const id = req.params.id;
+
+  productService.getByManufacturer(id).then((result) => {
+    res.status(result.status).json(result.data);
+  });
+});
+
 router.get("/", (req, res) => {
   productService.getAll().then((result) => {
     res.status(result.status).json(result.data);

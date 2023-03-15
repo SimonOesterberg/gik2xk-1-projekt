@@ -103,3 +103,11 @@
 .UserRatings__List li {
     margin-bottom: 1rem;
 }
+
+.ProductDetail__manufacturer-link {
+    color: black;
+    display: flex;
+    align-items: center;
+    height: 100%;
+    text-decoration: none;
+}

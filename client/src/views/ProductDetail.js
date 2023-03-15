@@ -5,13 +5,17 @@ import LocalShippingIcon from "@mui/icons-material/LocalShipping";
 import InventoryIcon from "@mui/icons-material/Inventory";
 import FactoryIcon from "@mui/icons-material/Factory";
 import ProductRating from "../components/ProductRating";
+import { Link } from "react-router-dom";
+import { useEffect, useState } from "react";
+import { getAll } from "../models/ProductModel";
 
-const productData = {
+/* const productData = {
   name: "Fin Färg",
   averageRating: 7,
   manufacturer: "Tomas Kvist AB",
   manufacturer_logo:
     "https://www.borgunda.se/wp-content/uploads/2014/08/Falu-R%C3%B6df%C3%A4rg-logga.jpg",
+  manufacturer_id: 2,
   description: "Väldigt rolig och bra färg för alla miljöer!",
   ratings: 23,
   price: 200,
@@ -35,9 +39,21 @@ const productData = {
       reviewRating: 9,
     },
   ],
-};
+}; */
 
-export default function ProductDetail() {
+export default function ProductDetail({ pathname }) {
+  const [product, setProduct] = useState([]);
+
+  useEffect(() => {
+    getAll(pathname).then((product) => setProduct(product));
+  }, [pathname]);
+
+  let productData = JSON.stringify(product.data);
+
+  if (productData) {
+    productData = JSON.parse(productData);
+  }
+
   return (
     <Grid
       container
@@ -75,14 +91,21 @@ export default function ProductDetail() {
             <Typography variant="h6" component="p">
               &nbsp;Manufacturer:&nbsp;
             </Typography>
-            <Typography variant="string" component="p">
-              {productData.manufacturer}&nbsp;
-            </Typography>
-            <img
-              height={"100%"}
-              src={productData.manufacturer_logo}
-              alt="Manufacturer logo"
-            ></img>
+
+            <Link
+              to={`/products/manufacturer/${productData.manufacturer_id}`}
+              className={"ProductDetail__manufacturer-link"}
+            >
+              <Typography variant="string" component="p">
+                {productData.manufacturer}&nbsp;
+              </Typography>
+
+              <img
+                height={"100%"}
+                src={productData.manufacturer_logo}
+                alt="Manufacturer logo"
+              />
+            </Link>
           </Box>
           <Box className="ProductDetail__basic-info">
             <LocalShippingIcon></LocalShippingIcon>

@@ -9,6 +9,7 @@
     
     width: 45%;
     background-color: rgba(169, 175, 175, 0.293);
+    border-radius: 10px;
 }
 
 .Grid__User{
@@ -21,9 +22,9 @@
     height: 4rem;
 }
 
-.btn{
-    border: solid 1px black;
-    width: 2rem;
-    height: 2rem;
+.Form__tf {
+    width: 100%;
 }
+
+
 

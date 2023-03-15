@@ -5,12 +5,14 @@ import { getAll } from "../models/ProductModel";
 import { useEffect, useState } from "react";
 import Products from "../views/Products";
 
-export default function ProductListLarge() {
+export default function ProductListLarge({ pathname }) {
+  console.log(pathname);
+
   const [products, setProducts] = useState([]);
 
   useEffect(() => {
-    getAll().then((products) => setProducts(products));
-  }, []);
+    getAll(pathname).then((products) => setProducts(products));
+  }, [pathname]);
 
   let newProducts = JSON.stringify(products.data);
 
@@ -35,7 +37,15 @@ export default function ProductListLarge() {
           const cols = 1;
           const rows = 1;
 
-          return <ProductListItem item={product} cols={cols} rows={rows} />;
+          return (
+            <ProductListItem
+              className="ThisIsClass"
+              key={`productId_${product.id}`}
+              item={product}
+              cols={cols}
+              rows={rows}
+            />
+          );
         })}
     </ImageList>
   );

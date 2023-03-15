@@ -5,7 +5,9 @@ import Cart from "./views/Cart";
 import ProductDetail from "./views/ProductDetail";
 import Products from "./views/Products";
 import User from "./views/User";
+import CreateUser from "./views/CreateUser";
 import Wishlist from "./views/Wishlist";
+import CreateProduct from "./views/CreateProduct";
 
 import { styled, alpha } from "@mui/material/styles";
 import AppBar from "@mui/material/AppBar";
@@ -131,13 +133,28 @@ function App() {
           <Route exact path="/Products" element={<Products></Products>}></Route>
           <Route
             exact
+            path="/CreateUser"
+            element={<CreateUser></CreateUser>}
+          ></Route>
+          <Route
+            exact
             path="/Wishlist/:id"
             element={<Wishlist></Wishlist>}
           ></Route>
           <Route
             exact
-            path="/Product/:id"
+            path="/product/:id"
             element={<ProductDetail></ProductDetail>}
+          ></Route>
+          <Route
+            exact
+            path="/CreateProduct"
+            element={<CreateProduct></CreateProduct>}
+          ></Route>
+          <Route
+            exact
+            path="/products/manufacturer/:id"
+            element={<Products></Products>}
           ></Route>
         </Routes>
       </div>

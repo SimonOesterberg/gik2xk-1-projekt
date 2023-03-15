@@ -53,9 +53,10 @@ async function getByManufacturer(id) {
   try {
     const allProducts = await db.product.findAll({
       where: { manufacturerId: id },
+      include: [db.manufacturer],
     });
 
-    return createResponseSuccess(allProducts.map(product));
+    return createResponseSuccess(allProducts);
   } catch (error) {
     return createResponseError(error.status, error.message);
   }
@@ -121,4 +122,5 @@ module.exports = {
   create,
   update,
   destroy,
+  getByManufacturer,
 };

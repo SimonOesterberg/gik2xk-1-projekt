@@ -1,19 +1,11 @@
-import { Box } from "@mui/material";
+import { Box, textFieldClasses } from "@mui/material";
 import Grid from "@mui/material/Grid";
 import "./Users.css";
 import PersonIcon from "@mui/icons-material/Person";
 import { TextField } from "@mui/material";
 import SettingsIcon from "@mui/icons-material/Settings";
 import { IconButton } from "@mui/material";
-
-const UserAccount = {
-  Username: "CHOCHOCharles",
-  ProfilePicture:
-    "https://images.pexels.com/photos/771742/pexels-photo-771742.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2",
-  Name: "Tomas Trainson",
-  email: "Tomas@gmail.com",
-  Password: "*****",
-};
+import { Link } from "react-router-dom";
 
 function User() {
   return (
@@ -28,20 +20,20 @@ function User() {
               <img
                 className="Box__User__Image"
                 height={"100%"}
-                src={UserAccount.ProfilePicture}
+                src={""}
                 alt="profile picture"
               ></img>
             </Box>
           </Grid>
           <Grid item xs={5} md={5}>
-            username
+            Username
           </Grid>
           <Grid item xs={5} md={5}>
             <TextField
-              disabled
+              label="Username"
+              className="tf"
               variant="outlined"
               multiline
-              label={UserAccount.Username}
             />
           </Grid>
           <Grid item xs={5} md={5}>
@@ -49,19 +41,19 @@ function User() {
           </Grid>
           <Grid item xs={5} md={5}>
             <TextField
-              disabled
-              label={UserAccount.Name}
+              label="Name"
+              className="tf"
               variant="outlined"
               multiline
             />
           </Grid>
           <Grid item xs={5} md={5}>
-            email
+            Email
           </Grid>
           <Grid item xs={5} md={5}>
             <TextField
-              disabled
-              label={UserAccount.email}
+              className="tf"
+              label="Email"
               variant="outlined"
               multiline
             />
@@ -71,8 +63,8 @@ function User() {
           </Grid>
           <Grid item xs={5} md={5}>
             <TextField
-              disabled
-              label={UserAccount.Password}
+              className="tf"
+              label="Password"
               variant="outlined"
               multiline
             />
@@ -81,8 +73,9 @@ function User() {
             {""}
           </Grid>
           <Grid item xs={4} md={4}>
-            <IconButton className="btn">
-              <SettingsIcon />
+            <IconButton className="btn" onClick={""}>
+              save
+              <Link to="/CreateUser">Color Shop</Link>
             </IconButton>
           </Grid>
         </Grid>
