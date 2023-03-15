@@ -3,13 +3,18 @@ import Grid from "@mui/material/Grid";
 import ProductListSmall from "../components/ProductListSmall";
 import "./Home.css";
 
+const HomePage = {
+  quoteOne: "Sätt färg på dina drömmar..",
+  quoteTwo: "Ge ditt liv lite mer färg.."
+}
+
 function Home() {
   return (
     <Grid container columnSpacing={2} rowSpacing={2} className="Home">
       <Grid item xs={12}>
         <Box className="Home__img">
-          <Typography variant="h2" component="h1">
-            Carpe Diem sebastian
+          <Typography className="Home__img--quote"variant="h2" component="h1">
+            {HomePage.quoteOne}
           </Typography>
         </Box>
       </Grid>
