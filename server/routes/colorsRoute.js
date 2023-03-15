@@ -45,7 +45,7 @@ router.get("/", (req, res) => {
 router.post("/", (req, res) => {
   const color = req.body;
   const invalidData = validate(color, constraints);
-  const colorName = color.colorName;
+  const colorName = color.name;
   const ncsValue = color.ncsValue;
 
   if (invalidData) {

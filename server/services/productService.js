@@ -49,6 +49,17 @@ async function getAll() {
   }
 }
 
+async function getByManufacturer(id) {
+  try {
+    const allProducts = await db.product.findAll({
+      where: { manufacturerId: id },
+    });
+
+    return createResponseSuccess(allProducts.map(product));
+  } catch (error) {
+    return createResponseError(error.status, error.message);
+  }
+}
 async function create(product) {
   const invalidData = validate(product, constraints);
   const name = product.name;
