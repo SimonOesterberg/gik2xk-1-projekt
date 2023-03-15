@@ -17,10 +17,10 @@ function srcset(image, width, height, rows, cols) {
 function ProductListItem({ item, cols, rows }) {
   return (
     <>
-      <ImageListItem key={item.img} cols={cols} rows={rows}>
+      <ImageListItem key={item.imageUrl} cols={cols} rows={rows}>
         <img
-          {...srcset(item.img, 250, 200, rows, cols)}
-          alt={item.title}
+          {...srcset(item.imageUrl, 250, 200, rows, cols)}
+          alt={item.name}
           loading="lazy"
         />
         <ImageListItemBar
@@ -29,27 +29,25 @@ function ProductListItem({ item, cols, rows }) {
               "linear-gradient(to bottom, rgba(0,0,0,0.7) 0%, " +
               "rgba(0,0,0,0.3) 70%, rgba(0,0,0,0) 100%)",
           }}
-          title={item.title}
+          title={item.name}
           position="top"
           actionIcon={
             <>
               <IconButton
                 sx={{ color: "white" }}
-                aria-label={`star ${item.title}`}
+                aria-label={`star ${item.name}`}
               >
                 <StarBorderIcon />
               </IconButton>
 
-              <actionIcon>
-                <IconButton
-                  sx={{ color: "white" }}
-                  aria-label={`info ${item.title}`}
-                >
-                  <Link to="/ProductDetail">
-                    <InfoIcon />
-                  </Link>
-                </IconButton>
-              </actionIcon>
+              <IconButton
+                sx={{ color: "white" }}
+                aria-label={`info ${item.name}`}
+              >
+                <Link to="/ProductDetail">
+                  <InfoIcon />
+                </Link>
+              </IconButton>
             </>
           }
           actionPosition="left"
