@@ -21,6 +21,7 @@ import SearchIcon from "@mui/icons-material/Search";
 import ShoppingCartIcon from "@mui/icons-material/ShoppingCart";
 import PersonIcon from "@mui/icons-material/Person";
 import StarIcon from "@mui/icons-material/Star";
+import Navbar from "./components/Navbar";
 
 const Search = styled("div")(({ theme }) => ({
   position: "relative",
@@ -70,6 +71,7 @@ function App() {
       <Box sx={{ flexGrow: 1 }}>
         <AppBar position="static">
           <Toolbar className="App__toolbar">
+
             <IconButton
               size="large"
               edge="start"
@@ -124,7 +126,14 @@ function App() {
             </IconButton>
           </Toolbar>
         </AppBar>
+
       </Box>
+        <Box>
+          <Navbar>
+
+          </Navbar>
+
+        </Box>
       <div>
         <Routes>
           <Route exact path="/" element={<Home></Home>}></Route>
