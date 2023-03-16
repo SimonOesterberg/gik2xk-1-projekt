@@ -5,7 +5,7 @@ export default function ProductRating({ rating }) {
   return (
     <>
       <li>
-        <Box className="Rating__container">
+        <Box className="ProductDetail__container">
           <Box className="Rating__header">
             <Grid className="Rating__image-container" item xs={6}>
               <img
@@ -14,7 +14,7 @@ export default function ProductRating({ rating }) {
                 alt="Profile"
               ></img>
               <Typography variant="string" component="p">
-                {rating.user.name}
+                {rating.user.userName}
               </Typography>
             </Grid>
             <Grid item xs={6} className="Rating__stars">

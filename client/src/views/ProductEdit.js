@@ -1,22 +1,46 @@
-import { Grid, Typography } from "@mui/material";
+import { Button, Grid, Typography } from "@mui/material";
 import Box from "@mui/material/Box";
 import TextField from "@mui/material/TextField";
-import { getAll } from "../models/ProductModel";
+import { getOne } from "../models/ProductModel";
 import { useEffect, useState } from "react";
 
-import "./CreateProduct.css";
+import "./ProductEdit.css";
+import { useParams } from "react-router-dom";
 
-export default function CreateProduct() {
-  const [products, setProducts] = useState([]);
+export default function ProductEdit() {
+  const params = useParams();
+  const productId = params.id;
+
+  const emptyProduct = {
+    id: 0,
+    name: "",
+    category: [],
+    imageUrl: "",
+    description: "",
+    price: 0,
+    manufacturerId: 0,
+    colorId: 0,
+  };
+
+  const [product, setProduct] = useState(emptyProduct);
 
   useEffect(() => {
-    getAll().then((products) => setProducts(products));
-  }, []);
+    if (!isNaN(productId)) {
+      getOne(productId).then((product) => {
+        setProduct(product);
+      });
+    } else {
+      setProduct(emptyProduct);
+    }
+    // eslint-disable-next-line
+  }, [productId]);
 
-  let newProducts = JSON.stringify(products.data);
+  function onChange(e) {
+    const name = e.target.name;
+    const value = e.target.value;
 
-  if (newProducts) {
-    newProducts = JSON.parse(newProducts);
+    const newProduct = { ...product, [name]: value };
+    setProduct(newProduct);
   }
 
   return (
@@ -40,54 +64,63 @@ export default function CreateProduct() {
           <Typography variant="h3" component="h1" textAlign={"center"}>
             Create Product
           </Typography>
-
           <TextField
             className="Form__tf"
+            onChange={onChange}
+            value={product.name}
+            name="name"
             required
             label="Name"
             style={{ width: "20%" }}
           />
-
           <TextField
             className="Form__tf"
+            onChange={onChange}
+            value={product.category}
+            name="category"
             required
             label="Category"
             style={{ width: "20%" }}
           />
-
           <TextField
             className="Form__tf"
+            onChange={onChange}
+            value={product.imageUrl}
+            name="imageUrl"
             required
             label="Image URL"
             style={{ width: "54%" }}
           />
           <TextField
+            onChange={onChange}
             className="Form__tf"
+            value={product.price}
+            name="price"
             required
             label="Price"
             style={{ width: "20%" }}
           />
-
           <TextField
+            onChange={onChange}
             className="Form__tf"
-            required
-            label="Stock"
-            style={{ width: "20%" }}
-          />
-          <TextField
-            className="Form__tf"
+            value={product.colorId}
+            name="colorId"
             required
             label="Color ID"
             style={{ width: "20%" }}
           />
           <TextField
+            onChange={onChange}
             className="Form__tf"
+            value={product.description}
+            name="description"
             required
             label="Description"
             multiline
             rows={4}
             style={{ width: "98%" }}
           />
+          <Button variant="filled">Spara</Button>
         </Box>
       </Grid>
       <Grid item xs></Grid>

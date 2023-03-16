@@ -7,7 +7,14 @@ import SettingsIcon from "@mui/icons-material/Settings";
 import { IconButton } from "@mui/material";
 import { Link } from "react-router-dom";
 
-function getInfor() {}
+const handleClick = (e) => {
+  e.preventDefault();
+  const username = document.getElementById("tf").value;
+  console.log(username);
+};
+
+const user = { id: 1 };
+
 function User() {
   return (
     <Box className="Box__User">
@@ -31,10 +38,12 @@ function User() {
           </Grid>
           <Grid item xs={5} md={5}>
             <TextField
+              value="sebastian"
               label="Username"
-              className="tf"
+              id="tfU"
               variant="outlined"
               multiline
+              disabled
             />
           </Grid>
           <Grid item xs={5} md={5}>
@@ -46,6 +55,7 @@ function User() {
               className="tf"
               variant="outlined"
               multiline
+              disabled
             />
           </Grid>
           <Grid item xs={5} md={5}>
@@ -57,6 +67,7 @@ function User() {
               label="Email"
               variant="outlined"
               multiline
+              disabled
             />
           </Grid>
           <Grid item xs={5} md={5}>
@@ -68,6 +79,7 @@ function User() {
               label="Password"
               variant="outlined"
               multiline
+              disabled
             />
           </Grid>
           <Grid item xs={8} md={8}>
@@ -75,7 +87,7 @@ function User() {
           </Grid>
           <Grid item xs={4} md={4}>
             <IconButton className="btn" onClick={""}>
-              Save
+              <Link to={`/users/${user.id}/edit`}>Save</Link>
             </IconButton>
           </Grid>
         </Grid>

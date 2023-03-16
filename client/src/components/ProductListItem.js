@@ -44,7 +44,7 @@ function ProductListItem({ item, cols, rows }) {
                 sx={{ color: "white" }}
                 aria-label={`info ${item.name}`}
               >
-                <Link to={`/Product/${item.id}`}>
+                <Link to={`/products/${item.id}`}>
                   <InfoIcon />
                 </Link>
               </IconButton>

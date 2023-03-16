@@ -3,11 +3,12 @@ import { Routes, Route, Link } from "react-router-dom";
 import Home from "./views/Home";
 import Cart from "./views/Cart";
 import ProductDetail from "./views/ProductDetail";
+import ProductEdit from "./views/ProductEdit";
 import Products from "./views/Products";
 import User from "./views/User";
-import CreateUser from "./views/CreateUser";
+import UserEdit from "./views/UserEdit";
 import Wishlist from "./views/Wishlist";
-import CreateProduct from "./views/CreateProduct";
+import CreateProduct from "./views/ProductEdit";
 
 import { styled, alpha } from "@mui/material/styles";
 import AppBar from "@mui/material/AppBar";
@@ -78,7 +79,7 @@ function App() {
               aria-label="open drawer"
               sx={{ mr: 2 }}
             >
-              <Link to="/Products">
+              <Link to="/products">
                 <MenuIcon />
               </Link>
             </IconButton>
@@ -102,24 +103,20 @@ function App() {
               />
             </Search>
 
-            <Link to="/Product/1">
-              <Typography>Detail</Typography>
-            </Link>
-
             <IconButton sx={{ color: "white" }} aria-label={"Go to profile"}>
-              <Link to="/User/1">
+              <Link to="/users/new">
                 <PersonIcon />
               </Link>
             </IconButton>
 
             <IconButton sx={{ color: "white" }} aria-label={`Wishlist`}>
-              <Link to="/Wishlist/1">
+              <Link to="/wishlists/1">
                 <StarIcon />
               </Link>
             </IconButton>
 
             <IconButton aria-label="Go to shopping cart">
-              <Link to="/Cart/1">
+              <Link to="/carts/1">
                 <ShoppingCartIcon />
               </Link>
             </IconButton>
@@ -151,8 +148,8 @@ function App() {
         <Grid item xs={9}>
           <Routes>
             <Route exact path="/" element={<Home></Home>}></Route>
-            <Route exact path="/User/:id" element={<User></User>}></Route>
-            <Route exact path="/Cart/:id" element={<Cart></Cart>}></Route>
+            <Route exact path="/users" element={<User></User>}></Route>
+            <Route exact path="/carts/:id" element={<Cart></Cart>}></Route>
             <Route
               exact
               path="/products"
@@ -160,12 +157,17 @@ function App() {
             ></Route>
             <Route
               exact
-              path="/CreateUser"
-              element={<CreateUser></CreateUser>}
+              path="/users/new"
+              element={<UserEdit></UserEdit>}
             ></Route>
             <Route
               exact
-              path="/Wishlist/:id"
+              path="/users/:id/edit"
+              element={<UserEdit></UserEdit>}
+            ></Route>
+            <Route
+              exact
+              path="/wishlists/:id"
               element={<Wishlist></Wishlist>}
             ></Route>
             <Route
@@ -175,8 +177,13 @@ function App() {
             ></Route>
             <Route
               exact
-              path="/CreateProduct"
-              element={<CreateProduct></CreateProduct>}
+              path="/products/new"
+              element={<ProductEdit></ProductEdit>}
+            ></Route>
+            <Route
+              exact
+              path="/products/:id/edit"
+              element={<ProductEdit></ProductEdit>}
             ></Route>
             <Route
               exact

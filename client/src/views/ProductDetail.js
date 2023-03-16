@@ -1,4 +1,11 @@
-import { Rating, Typography, Box, TextField, Button } from "@mui/material";
+import {
+  Rating,
+  Typography,
+  Box,
+  TextField,
+  Button,
+  IconButton,
+} from "@mui/material";
 import Grid from "@mui/material/Grid";
 import "./ProductDetail.css";
 import LocalShippingIcon from "@mui/icons-material/LocalShipping";
@@ -8,6 +15,7 @@ import ProductRating from "../components/ProductRating";
 import { Link, useParams } from "react-router-dom";
 import { useEffect, useState } from "react";
 import { getOne } from "../models/ProductModel";
+import SettingsIcon from "@mui/icons-material/Settings";
 
 export default function ProductDetail() {
   const params = useParams();
@@ -16,23 +24,27 @@ export default function ProductDetail() {
   const [product, setProduct] = useState({});
 
   useEffect(() => {
-    getOne(productId).then((product) => setProduct(product));
+    getOne(productId).then((product) => {
+      setProduct(product);
+    });
   }, [productId]);
-
-  console.log(product);
 
   let averageScore = 0;
 
-  if (product.ratings.length > 0) {
+  /* if (product && product.ratings.length > 0) {
     let totalScore = 0;
     product.ratings.forEach(function (rating) {
       totalScore += rating;
     });
 
     averageScore = totalScore / product.ratings.length;
-  }
+  } */
 
-  return (
+  const manufacturer = product.manufacturer;
+  const stock = product.uniqueProducts;
+  const ratings = product.ratings;
+
+  return product && manufacturer ? (
     <Grid
       container
       columnSpacing={5}
@@ -40,15 +52,12 @@ export default function ProductDetail() {
       className="ProductDetail__grid"
     >
       <Grid item xs={6}>
-        <Box className="ProductDetail__image-container">
-          <img
-            src="https://eu.louisvuitton.com/images/is/image/lv/1/PP_VP_L/louis-vuitton-lv-paint-can-monogram-other-bags--M81590_PM1_Other%20view.jpg"
-            alt="Product"
-          ></img>
+        <Box className="ProductDetail__image-container ProductDetail__container">
+          <img src={product.imageUrl} alt="Product"></img>
         </Box>
       </Grid>
       <Grid item xs={6}>
-        <Box className="ProductDetail__basic-info-container">
+        <Box className="ProductDetail__basic-info-container ProductDetail__container">
           <Typography variant="h3" component="h2">
             {product.name}
           </Typography>
@@ -71,16 +80,16 @@ export default function ProductDetail() {
             </Typography>
 
             <Link
-              to={`/products/manufacturer/${product.manufacturer_id}`}
+              to={`/products/manufacturer/${manufacturer.id}`}
               className={"ProductDetail__manufacturer-link"}
             >
               <Typography variant="string" component="p">
-                {product.manufacturer.name}&nbsp;
+                {manufacturer.name}&nbsp;
               </Typography>
 
               <img
                 height={"100%"}
-                src={product.manufacturer.logoUrl}
+                src={manufacturer.logoUrl}
                 alt="Manufacturer logo"
               />
             </Link>
@@ -100,13 +109,20 @@ export default function ProductDetail() {
               &nbsp;In Stock:&nbsp;
             </Typography>
             <Typography variant="string" component="p">
-              {product.stock}
+              {stock.length}
             </Typography>
+          </Box>
+          <Box className="ProductDetail__basic-info">
+            <IconButton aria-label="Edit product">
+              <Link to={`/products/${product.id}/edit`}>
+                <SettingsIcon></SettingsIcon>
+              </Link>
+            </IconButton>
           </Box>
         </Box>
       </Grid>
       <Grid item xs={6}>
-        <Box className="Bottom-container">
+        <Box className="Bottom-container ProductDetail__container">
           <Typography variant="h4" component="h3">
             Description
           </Typography>
@@ -117,10 +133,10 @@ export default function ProductDetail() {
       </Grid>
       <Grid item xs={6}>
         <Box className="Bottom-container">
-          <Typography variant="h4" component="h3">
-            Add a rating
-          </Typography>
-          <Box className="Rating__container">
+          <Box className="ProductDetail__container">
+            <Typography variant="h4" component="h3">
+              Add a rating
+            </Typography>
             <Box className="Rating__header">
               <Grid className="Rating__image-container" item xs={6}>
                 <img
@@ -131,7 +147,7 @@ export default function ProductDetail() {
                   alt="Profile"
                 ></img>
                 <Typography variant="string" component="p">
-                  {product.userName}
+                  Användarnamn
                 </Typography>
               </Grid>
               <Grid item xs={6} className="Rating__stars">
@@ -150,20 +166,24 @@ export default function ProductDetail() {
               <Button variant="contained">Submit</Button>
             </Box>
           </Box>
-          <Typography
-            className="UserRatings__header"
-            variant="h4"
-            component="h3"
-          >
-            User Ratings
-          </Typography>
-          <ul className="UserRatings__List">
-            {product.ratings.map((rating) => {
-              return <ProductRating rating={rating} />;
-            })}
-          </ul>
+          <Box className="ProductDetail__container" mt={"1rem"}>
+            <Typography
+              className="UserRatings__header"
+              variant="h4"
+              component="h3"
+            >
+              User Ratings
+            </Typography>
+            <ul className="UserRatings__List">
+              {ratings.map((rating) => {
+                return <ProductRating rating={rating} />;
+              })}
+            </ul>
+          </Box>
         </Box>
       </Grid>
     </Grid>
+  ) : (
+    <Typography>Ingen produkt</Typography>
   );
 }
