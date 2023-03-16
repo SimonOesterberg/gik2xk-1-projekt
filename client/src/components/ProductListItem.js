@@ -17,7 +17,7 @@ function srcset(image, width, height, rows, cols) {
 function ProductListItem({ item, cols, rows }) {
   return (
     <>
-      <ImageListItem key={item.imageUrl} cols={cols} rows={rows}>
+      <ImageListItem cols={cols} rows={rows}>
         <img
           {...srcset(item.imageUrl, 250, 200, rows, cols)}
           alt={item.name}

@@ -30,10 +30,6 @@ module.exports = (sequelize, DataTypes) => {
         type: DataTypes.FLOAT(5),
         allowNull: false,
       },
-      stock: {
-        type: DataTypes.INTEGER(6),
-        allowNull: false,
-      },
     },
     { underscored: true }
   );

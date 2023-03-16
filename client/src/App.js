@@ -21,7 +21,7 @@ import SearchIcon from "@mui/icons-material/Search";
 import ShoppingCartIcon from "@mui/icons-material/ShoppingCart";
 import PersonIcon from "@mui/icons-material/Person";
 import StarIcon from "@mui/icons-material/Star";
-import Navbar from "./components/Navbar";
+import { Grid } from "@mui/material";
 
 const Search = styled("div")(({ theme }) => ({
   position: "relative",
@@ -71,7 +71,6 @@ function App() {
       <Box sx={{ flexGrow: 1 }}>
         <AppBar position="static">
           <Toolbar className="App__toolbar">
-
             <IconButton
               size="large"
               edge="start"
@@ -126,47 +125,67 @@ function App() {
             </IconButton>
           </Toolbar>
         </AppBar>
-
       </Box>
-        <Box>
-          <Navbar>
-
-          </Navbar>
-
-        </Box>
-      <div>
-        <Routes>
-          <Route exact path="/" element={<Home></Home>}></Route>
-          <Route exact path="/User/:id" element={<User></User>}></Route>
-          <Route exact path="/Cart/:id" element={<Cart></Cart>}></Route>
-          <Route exact path="/Products" element={<Products></Products>}></Route>
-          <Route
-            exact
-            path="/CreateUser"
-            element={<CreateUser></CreateUser>}
-          ></Route>
-          <Route
-            exact
-            path="/Wishlist/:id"
-            element={<Wishlist></Wishlist>}
-          ></Route>
-          <Route
-            exact
-            path="/product/:id"
-            element={<ProductDetail></ProductDetail>}
-          ></Route>
-          <Route
-            exact
-            path="/CreateProduct"
-            element={<CreateProduct></CreateProduct>}
-          ></Route>
-          <Route
-            exact
-            path="/products/manufacturer/:id"
-            element={<Products></Products>}
-          ></Route>
-        </Routes>
-      </div>
+      <Grid container columnSpacing={5} rowSpacing={2} mt={"0"}>
+        <Grid item xs={2}>
+          <Box className="app__navbar">
+            <ul className="navbar__ul" style={{ liststyletype: "none" }}>
+              <li className="navbar__ul--li">
+                <Link to={"/"}> Products</Link>
+              </li>
+              <li className="navbar__ul--li">
+                {" "}
+                <Link to={"/"}> Products</Link>
+              </li>
+              <li className="navbar__ul--li">
+                {" "}
+                <Link to={"/"}> Products</Link>
+              </li>
+              <li className="navbar__ul--li">
+                {" "}
+                <Link to={"/"}> Products</Link>
+              </li>
+            </ul>
+          </Box>
+        </Grid>
+        <Grid item xs={9}>
+          <Routes>
+            <Route exact path="/" element={<Home></Home>}></Route>
+            <Route exact path="/User/:id" element={<User></User>}></Route>
+            <Route exact path="/Cart/:id" element={<Cart></Cart>}></Route>
+            <Route
+              exact
+              path="/products"
+              element={<Products></Products>}
+            ></Route>
+            <Route
+              exact
+              path="/CreateUser"
+              element={<CreateUser></CreateUser>}
+            ></Route>
+            <Route
+              exact
+              path="/Wishlist/:id"
+              element={<Wishlist></Wishlist>}
+            ></Route>
+            <Route
+              exact
+              path="/products/:id"
+              element={<ProductDetail></ProductDetail>}
+            ></Route>
+            <Route
+              exact
+              path="/CreateProduct"
+              element={<CreateProduct></CreateProduct>}
+            ></Route>
+            <Route
+              exact
+              path="/products/manufacturer/:id"
+              element={<Products></Products>}
+            ></Route>
+          </Routes>
+        </Grid>
+      </Grid>
     </div>
   );
 }

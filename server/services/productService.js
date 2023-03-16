@@ -32,7 +32,14 @@ async function getById(id) {
   try {
     const allProducts = await db.product.findOne({
       where: { id },
-      include: [{ model: db.uniqueProduct, model: db.manufacturer }],
+      include: [
+        db.uniqueProduct,
+        db.manufacturer,
+        {
+          model: db.rating,
+          include: [db.user],
+        },
+      ],
     });
     return createResponseSuccess(allProducts);
   } catch (error) {

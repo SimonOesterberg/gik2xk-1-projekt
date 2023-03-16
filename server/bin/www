@@ -27,7 +27,7 @@ var server = http.createServer(app);
 const db = require("../models/");
 db.sequelize
   .sync({
-    /* force: true  */
+    /*force: true,*/
   })
   .then(() => {
     server.listen(port, () => {

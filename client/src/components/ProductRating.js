@@ -1,7 +1,7 @@
 import { Grid, Rating, Typography } from "@mui/material";
 import { Box } from "@mui/system";
 
-export default function ProductRating({ review }) {
+export default function ProductRating({ rating }) {
   return (
     <>
       <li>
@@ -10,17 +10,17 @@ export default function ProductRating({ review }) {
             <Grid className="Rating__image-container" item xs={6}>
               <img
                 className="Rating__image"
-                src={review.profile_pic}
+                src={rating.user.imageUrl}
                 alt="Profile"
               ></img>
               <Typography variant="string" component="p">
-                {review.reviewUser}
+                {rating.user.name}
               </Typography>
             </Grid>
             <Grid item xs={6} className="Rating__stars">
               <Rating
                 name="reviewRating"
-                value={(review.reviewRating / 10) * 5}
+                value={(rating.score / 10) * 5}
                 precision={0.5}
                 readOnly
               />
@@ -28,7 +28,7 @@ export default function ProductRating({ review }) {
           </Box>
 
           <Typography variant="string" paragraph={true} component="p">
-            {review.reviewText}
+            {rating.description}
           </Typography>
         </Box>
       </li>

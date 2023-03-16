@@ -7,6 +7,7 @@ import SettingsIcon from "@mui/icons-material/Settings";
 import { IconButton } from "@mui/material";
 import { Link } from "react-router-dom";
 
+function getInfor() {}
 function User() {
   return (
     <Box className="Box__User">
@@ -74,8 +75,7 @@ function User() {
           </Grid>
           <Grid item xs={4} md={4}>
             <IconButton className="btn" onClick={""}>
-              save
-              <Link to="/CreateUser">Color Shop</Link>
+              Save
             </IconButton>
           </Grid>
         </Grid>

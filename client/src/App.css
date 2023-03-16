@@ -1,5 +1,7 @@
 .App {
   text-align: left;
+  background-image: url(https://images.pexels.com/photos/207253/pexels-photo-207253.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2);
+  
 }
 
 a {
@@ -11,4 +13,29 @@ html {
 
 .css-mhc70k-MuiGrid-root {
   margin-top: 0 !important;
+}
+
+.app__navbar{
+  border: solid black 1px;
+  height: fit-content;
+  box-shadow: 6px 5px 11px -4px rgba(0,0,0,0.83);
+-webkit-box-shadow: 6px 5px 11px -4px rgba(0,0,0,0.83);
+-moz-box-shadow: 6px 5px 11px -4px rgba(0,0,0,0.83);
+background-color: whitesmoke;
+
+  
+}
+.navbar__ul{
+  list-style-type: none;
+  
+}
+.navbar__ul--li{
+  padding-bottom: 2rem;
+  
+}
+
+.navbar__ul--li *{
+  color: black;
+  text-decoration: none;
+  
 }

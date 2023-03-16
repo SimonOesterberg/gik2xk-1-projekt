@@ -65,14 +65,6 @@ db.uniqueProduct.belongsTo(db.product, {
   onDelete: "CASCADE",
 });
 
-db.product.hasOne(db.ratingList, {
-  foreignKey: { allowNull: false },
-  onDelete: "CASCADE",
-});
-db.ratingList.belongsTo(db.product, {
-  foreignKey: { allowNull: false },
-});
-
 //uniqueProduct id
 db.cart.hasMany(db.uniqueProduct);
 db.uniqueProduct.belongsTo(db.cart);
@@ -95,11 +87,11 @@ db.rating.belongsTo(db.user, {
 });
 
 //ratingList id
-db.ratingList.hasMany(db.rating, {
+db.product.hasMany(db.rating, {
   foreignKey: { allowNull: false },
   onDelete: "CASCADE",
 });
-db.rating.belongsTo(db.ratingList, {
+db.rating.belongsTo(db.product, {
   foreignKey: { allowNull: false },
 });
 

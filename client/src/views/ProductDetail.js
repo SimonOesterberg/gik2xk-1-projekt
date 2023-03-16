@@ -5,53 +5,31 @@ import LocalShippingIcon from "@mui/icons-material/LocalShipping";
 import InventoryIcon from "@mui/icons-material/Inventory";
 import FactoryIcon from "@mui/icons-material/Factory";
 import ProductRating from "../components/ProductRating";
-import { Link } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 import { useEffect, useState } from "react";
-import { getAll } from "../models/ProductModel";
+import { getOne } from "../models/ProductModel";
 
-/* const productData = {
-  name: "Fin Färg",
-  averageRating: 7,
-  manufacturer: "Tomas Kvist AB",
-  manufacturer_logo:
-    "https://www.borgunda.se/wp-content/uploads/2014/08/Falu-R%C3%B6df%C3%A4rg-logga.jpg",
-  manufacturer_id: 2,
-  description: "Väldigt rolig och bra färg för alla miljöer!",
-  ratings: 23,
-  price: 200,
-  profile_pic:
-    "https://th.bing.com/th/id/OIP.8bLU1tvPgHVMJ4ZKSrbN2wHaHa?pid=ImgDet&rs=1",
-  stock: 386,
-  userName: "My Username",
-  reviews: [
-    {
-      profile_pic:
-        "https://th.bing.com/th/id/OIP.8bLU1tvPgHVMJ4ZKSrbN2wHaHa?pid=ImgDet&rs=1",
-      reviewText: "Riktigt dålig produkt! Kommer aldrig köpa igen!",
-      reviewUser: "Päär Dukan",
-      reviewRating: 3,
-    },
-    {
-      profile_pic:
-        "https://th.bing.com/th/id/OIP.8bLU1tvPgHVMJ4ZKSrbN2wHaHa?pid=ImgDet&rs=1",
-      reviewText: "Toppen",
-      reviewUser: "Jag Hetersson",
-      reviewRating: 9,
-    },
-  ],
-}; */
+export default function ProductDetail() {
+  const params = useParams();
+  const productId = params.id;
 
-export default function ProductDetail({ pathname }) {
-  const [product, setProduct] = useState([]);
+  const [product, setProduct] = useState({});
 
   useEffect(() => {
-    getAll(pathname).then((product) => setProduct(product));
-  }, [pathname]);
+    getOne(productId).then((product) => setProduct(product));
+  }, [productId]);
 
-  let productData = JSON.stringify(product.data);
+  console.log(product);
 
-  if (productData) {
-    productData = JSON.parse(productData);
+  let averageScore = 0;
+
+  if (product.ratings.length > 0) {
+    let totalScore = 0;
+    product.ratings.forEach(function (rating) {
+      totalScore += rating;
+    });
+
+    averageScore = totalScore / product.ratings.length;
   }
 
   return (
@@ -72,19 +50,19 @@ export default function ProductDetail({ pathname }) {
       <Grid item xs={6}>
         <Box className="ProductDetail__basic-info-container">
           <Typography variant="h3" component="h2">
-            {productData.name}
+            {product.name}
           </Typography>
           <Typography variant="caption" component="p">
             <Rating
               name="avg-rating"
-              value={(productData.averageRating / 10) * 5}
+              value={(averageScore / 10) * 5}
               precision={0.5}
               readOnly
             />
-            ({productData.ratings})
+            ({product.ratings.length})
           </Typography>
           <Typography variant="h5" component="p">
-            {productData.price} kr
+            {product.price} kr
           </Typography>
           <Box className="ProductDetail__basic-info">
             <FactoryIcon></FactoryIcon>
@@ -93,16 +71,16 @@ export default function ProductDetail({ pathname }) {
             </Typography>
 
             <Link
-              to={`/products/manufacturer/${productData.manufacturer_id}`}
+              to={`/products/manufacturer/${product.manufacturer_id}`}
               className={"ProductDetail__manufacturer-link"}
             >
               <Typography variant="string" component="p">
-                {productData.manufacturer}&nbsp;
+                {product.manufacturer.name}&nbsp;
               </Typography>
 
               <img
                 height={"100%"}
-                src={productData.manufacturer_logo}
+                src={product.manufacturer.logoUrl}
                 alt="Manufacturer logo"
               />
             </Link>
@@ -122,7 +100,7 @@ export default function ProductDetail({ pathname }) {
               &nbsp;In Stock:&nbsp;
             </Typography>
             <Typography variant="string" component="p">
-              {productData.stock}
+              {product.stock}
             </Typography>
           </Box>
         </Box>
@@ -133,7 +111,7 @@ export default function ProductDetail({ pathname }) {
             Description
           </Typography>
           <Typography variant="string" paragraph={true} component="p">
-            {productData.description}
+            {product.description}
           </Typography>
         </Box>
       </Grid>
@@ -147,11 +125,13 @@ export default function ProductDetail({ pathname }) {
               <Grid className="Rating__image-container" item xs={6}>
                 <img
                   className="Rating__image"
-                  src={productData.profile_pic}
+                  src={
+                    "https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_1280.png"
+                  }
                   alt="Profile"
                 ></img>
                 <Typography variant="string" component="p">
-                  {productData.userName}
+                  {product.userName}
                 </Typography>
               </Grid>
               <Grid item xs={6} className="Rating__stars">
@@ -178,8 +158,8 @@ export default function ProductDetail({ pathname }) {
             User Ratings
           </Typography>
           <ul className="UserRatings__List">
-            {productData.reviews.map((review) => {
-              return <ProductRating review={review} />;
+            {product.ratings.map((rating) => {
+              return <ProductRating rating={rating} />;
             })}
           </ul>
         </Box>

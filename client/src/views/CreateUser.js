@@ -8,7 +8,7 @@ import SettingsIcon from "@mui/icons-material/Settings";
 import { IconButton } from "@mui/material";
 import { Link } from "react-router-dom";
 
-function CreateUser() {
+export default function CreateUser() {
   <Box className="Box__User">
     <Box className="User__Grid--container">
       <Grid container spacing={2} className="Grid__User">
@@ -70,12 +70,10 @@ function CreateUser() {
         <Grid item xs={4} md={4}>
           <IconButton className="btn" onClick={""}>
             save
-            <Link to="/CreateUser">Color Shop</Link>
+            <Link to="/User">Save</Link>
           </IconButton>
         </Grid>
       </Grid>
     </Box>
   </Box>;
 }
-
-export default CreateUser;

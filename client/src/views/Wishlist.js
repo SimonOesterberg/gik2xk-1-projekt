@@ -7,7 +7,7 @@ export default function Wishlist() {
   return (
     <Box className="Wishlist__box">
       <Box className="Wishlist__box--container">
-        <Grid container columnSpacing={2} rowSpacing={2} className="Home">
+        <Grid container columnSpacing={3} rowSpacing={4} className="Home">
           <Grid className="Grid__item" item xs={12} md={12}>
             <Box>
               <Typography className="Header" variant="h4" component="h2">

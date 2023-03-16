@@ -22,7 +22,6 @@ app.use("/users", require("./routes/usersRoute.js"));
 app.use("/colors", require("./routes/colorsRoute.js"));
 app.use("/carts", require("./routes/cartsRoute.js"));
 app.use("/ratings", require("./routes/ratingsRoute.js"));
-app.use("/ratingLists", require("./routes/ratingListsRoute.js"));
 app.use("/uniqueProducts", require("./routes/uniqueProductsRoute.js"));
 app.use("/products", require("./routes/productsRoute.js"));
 app.use("/manufacturers", require("./routes/manufacturersRoute.js"));
