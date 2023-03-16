@@ -31,15 +31,9 @@ function ProductListItem({ item, cols, rows }) {
           }}
           title={item.name}
           position="top"
+          style={{ display: "flex", alignItems: "center" }}
           actionIcon={
             <>
-              <IconButton
-                sx={{ color: "white" }}
-                aria-label={`star ${item.name}`}
-              >
-                <StarBorderIcon />
-              </IconButton>
-
               <IconButton
                 sx={{ color: "white" }}
                 aria-label={`info ${item.name}`}
@@ -48,9 +42,20 @@ function ProductListItem({ item, cols, rows }) {
                   <InfoIcon />
                 </Link>
               </IconButton>
+              <IconButton
+                sx={{ color: "white" }}
+                aria-label={`star ${item.name}`}
+              >
+                <StarBorderIcon />
+              </IconButton>
             </>
           }
-          actionPosition="left"
+          actionPosition="right"
+        />
+        <ImageListItemBar
+          title={`${item.price}kr`}
+          position="bottom"
+          style={{ textAlign: "right" }}
         />
       </ImageListItem>
     </>

@@ -1,7 +1,7 @@
 import { Button, Grid, Typography } from "@mui/material";
 import Box from "@mui/material/Box";
 import TextField from "@mui/material/TextField";
-import { getOne } from "../models/ProductModel";
+import { create, getOne, update } from "../models/ProductModel";
 import { useEffect, useState } from "react";
 
 import "./ProductEdit.css";
@@ -14,7 +14,7 @@ export default function ProductEdit() {
   const emptyProduct = {
     id: 0,
     name: "",
-    category: [],
+    category: "",
     imageUrl: "",
     description: "",
     price: 0,
@@ -41,6 +41,14 @@ export default function ProductEdit() {
 
     const newProduct = { ...product, [name]: value };
     setProduct(newProduct);
+  }
+
+  function onSave() {
+    if (product.id === 0) {
+      create(product).then(() => console.log("sparad"));
+    } else {
+      update(product).then(() => console.log("uppdaterad"));
+    }
   }
 
   return (
@@ -103,6 +111,15 @@ export default function ProductEdit() {
           <TextField
             onChange={onChange}
             className="Form__tf"
+            value={product.manufacturerId}
+            name="manufacturerId"
+            required
+            label="Manufacturer ID"
+            style={{ width: "20%" }}
+          />
+          <TextField
+            onChange={onChange}
+            className="Form__tf"
             value={product.colorId}
             name="colorId"
             required
@@ -120,7 +137,9 @@ export default function ProductEdit() {
             rows={4}
             style={{ width: "98%" }}
           />
-          <Button variant="filled">Spara</Button>
+          <Button variant="filled" onMouseDown={onSave}>
+            Spara
+          </Button>
         </Box>
       </Grid>
       <Grid item xs></Grid>

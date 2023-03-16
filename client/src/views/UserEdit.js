@@ -48,6 +48,8 @@ export default function UserEdit() {
     setUser(newUser);
   }
 
+  function onSave() {}
+
   return (
     <Box className="Box__User">
       <form>
