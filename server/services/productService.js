@@ -34,6 +34,7 @@ async function getById(id) {
       where: { id },
       include: [
         db.uniqueProduct,
+        db.color,
         db.manufacturer,
         {
           model: db.rating,

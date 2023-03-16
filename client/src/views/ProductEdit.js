@@ -20,6 +20,7 @@ export default function ProductEdit() {
     price: 0,
     manufacturerId: 0,
     colorId: 0,
+    color: { hexValue: "#000" },
   };
 
   const [product, setProduct] = useState(emptyProduct);
@@ -50,6 +51,10 @@ export default function ProductEdit() {
       update(product).then(() => console.log("uppdaterad"));
     }
   }
+
+  const color = product.color;
+
+  console.log(color);
 
   return (
     <Grid
@@ -122,9 +127,10 @@ export default function ProductEdit() {
             className="Form__tf"
             value={product.colorId}
             name="colorId"
+            id="colorId"
             required
             label="Color ID"
-            style={{ width: "20%" }}
+            style={{ width: "20%", backgroundColor: color.rgbValue }}
           />
           <TextField
             onChange={onChange}
