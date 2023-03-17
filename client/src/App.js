@@ -9,6 +9,7 @@ import User from "./views/User";
 import UserEdit from "./views/UserEdit";
 import Wishlist from "./views/Wishlist";
 import CreateProduct from "./views/ProductEdit";
+import { getAll } from "./models/ProductModel";
 
 import { styled, alpha } from "@mui/material/styles";
 import AppBar from "@mui/material/AppBar";
@@ -22,7 +23,9 @@ import SearchIcon from "@mui/icons-material/Search";
 import ShoppingCartIcon from "@mui/icons-material/ShoppingCart";
 import PersonIcon from "@mui/icons-material/Person";
 import StarIcon from "@mui/icons-material/Star";
+import AddIcon from "@mui/icons-material/Add";
 import { Grid } from "@mui/material";
+import { useEffect, useState } from "react";
 
 const Search = styled("div")(({ theme }) => ({
   position: "relative",
@@ -66,7 +69,21 @@ const StyledInputBase = styled(InputBase)(({ theme }) => ({
   },
 }));
 
-function App() {
+function App({ pathname }) {
+  const [products, setProducts] = useState([]);
+  const filteredList = [];
+
+  useEffect(() => {
+    getAll(pathname).then((products) => setProducts(products));
+  }, [pathname]);
+
+  let newProducts = JSON.stringify(products.data);
+
+  if (newProducts) {
+    newProducts = JSON.parse(newProducts);
+    filteredList.push(newProducts);
+  }
+
   return (
     <div className="App">
       <Box sx={{ flexGrow: 1 }}>
@@ -98,10 +115,17 @@ function App() {
                 <SearchIcon />
               </SearchIconWrapper>
               <StyledInputBase
+                id="inputBox"
                 placeholder="Search…"
                 inputProps={{ "aria-label": "search" }}
               />
             </Search>
+
+            <IconButton sx={{ color: "white" }} aria-label={`Wishlist`}>
+              <Link to="/products/new">
+                <AddIcon />
+              </Link>
+            </IconButton>
 
             <IconButton sx={{ color: "white" }} aria-label={"Go to profile"}>
               <Link to="/users/new">
@@ -148,7 +172,7 @@ function App() {
         <Grid item xs={9}>
           <Routes>
             <Route exact path="/" element={<Home></Home>}></Route>
-            <Route exact path="/users" element={<User></User>}></Route>
+            <Route exact path="/users/:id" element={<User></User>}></Route>
             <Route exact path="/carts/:id" element={<Cart></Cart>}></Route>
             <Route
               exact
@@ -157,12 +181,17 @@ function App() {
             ></Route>
             <Route
               exact
-              path="/users/new"
+              path="/users/:id"
               element={<UserEdit></UserEdit>}
             ></Route>
             <Route
               exact
               path="/users/:id/edit"
+              element={<UserEdit></UserEdit>}
+            ></Route>
+            <Route
+              exact
+              path="/users/new"
               element={<UserEdit></UserEdit>}
             ></Route>
             <Route

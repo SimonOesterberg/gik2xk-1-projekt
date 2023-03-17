@@ -2,6 +2,7 @@ import { Box, Typography } from "@mui/material";
 import Grid from "@mui/material/Grid";
 import ProductListSmall from "../components/ProductListSmall";
 import "./Home.css";
+import { useLocation } from "react-router-dom";
 
 const HomePage = {
   quoteOne: "Sätt färg på dina drömmar..",
@@ -9,6 +10,7 @@ const HomePage = {
 };
 
 function Home() {
+  const location = useLocation();
   return (
     <Grid container columnSpacing={2} rowSpacing={2} className="Home">
       <Grid item xs={12}>
@@ -23,7 +25,10 @@ function Home() {
           <Typography className="Header" variant="h4" component="h2">
             Popular
           </Typography>
-          <ProductListSmall></ProductListSmall>
+          <ProductListSmall>
+            pathname={location.pathname}
+            className="ProductList"
+          </ProductListSmall>
         </Box>
       </Grid>
       <Grid className="Grid__item" item xs={12} md={4}>

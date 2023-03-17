@@ -1,7 +1,7 @@
 import { Button, Grid, Typography } from "@mui/material";
 import Box from "@mui/material/Box";
 import TextField from "@mui/material/TextField";
-import { create, getOne, update } from "../models/ProductModel";
+import { create, destroy, getOne, update } from "../models/ProductModel";
 import { useEffect, useState } from "react";
 
 import "./ProductEdit.css";
@@ -21,6 +21,7 @@ export default function ProductEdit() {
     manufacturerId: 0,
     colorId: 0,
     color: { hexValue: "#000" },
+    stock: 0,
   };
 
   const [product, setProduct] = useState(emptyProduct);
@@ -52,12 +53,17 @@ export default function ProductEdit() {
     }
   }
 
+  function onDelete() {
+    if (product.id !== 0) {
+      console.log("1:" + product.id);
+      destroy(product).then(() => console.log("borttagen"));
+    }
+  }
+
   const color = product.color;
 
-  console.log(color);
-
   return (
-    <Grid
+    /* productId && params !== "new" ? */ <Grid
       container
       columnSpacing={2}
       rowSpacing={2}
@@ -116,6 +122,15 @@ export default function ProductEdit() {
           <TextField
             onChange={onChange}
             className="Form__tf"
+            value={product.stock}
+            name="stock"
+            required
+            label="Stock"
+            style={{ width: "20%" }}
+          />
+          <TextField
+            onChange={onChange}
+            className="Form__tf"
             value={product.manufacturerId}
             name="manufacturerId"
             required
@@ -146,9 +161,40 @@ export default function ProductEdit() {
           <Button variant="filled" onMouseDown={onSave}>
             Spara
           </Button>
+          <Button variant="filled" onMouseDown={onDelete}>
+            Delete
+          </Button>
         </Box>
       </Grid>
       <Grid item xs></Grid>
-    </Grid>
-  );
+    </Grid> /* : (
+    <Typography>The product you're trying to edit doesn't exist</Typography>
+  )*/
+    /*: (
+    <Typography>The product you're trying to edit doesn't exist</Typography>
+  )*/
+    /*: (
+    <Typography>The product you're trying to edit doesn't exist</Typography>
+  )*/
+    /*: (
+    <Typography>The product you're trying to edit doesn't exist</Typography>
+  )*/
+    /*: (
+    <Typography>The product you're trying to edit doesn't exist</Typography>
+  )*/
+    /*: (
+    <Typography>The product you're trying to edit doesn't exist</Typography>
+  )*/
+    /*: (
+    <Typography>The product you're trying to edit doesn't exist</Typography>
+  )*/
+    /*: (
+    <Typography>The product you're trying to edit doesn't exist</Typography>
+  )*/
+    /*: (
+    <Typography>The product you're trying to edit doesn't exist</Typography>
+  )*/
+   /*: (
+    <Typography>The product you're trying to edit doesn't exist</Typography>
+  )*/);
 }

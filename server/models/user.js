@@ -28,7 +28,7 @@ module.exports = (sequelize, DataTypes) => {
           len: [2, 30],
         },
       },
-      adress: {
+      address: {
         type: DataTypes.STRING(30),
         allowNull: true,
       },
@@ -44,11 +44,15 @@ module.exports = (sequelize, DataTypes) => {
         allowNull: true,
       },
       imageUrl: {
-        type: DataTypes.STRING(100),
+        type: DataTypes.STRING(1000),
         allowNull: false,
         validate: {
           isUrl: true,
         },
+      },
+      password: {
+        type: DataTypes.STRING(100),
+        allowNull: false,
       },
     },
     { underscored: true }

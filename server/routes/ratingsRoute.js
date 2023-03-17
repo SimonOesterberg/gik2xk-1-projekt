@@ -33,7 +33,7 @@ router.post("/", (req, res) => {
   const score = rating.score;
 
   if (invalidData || !score) {
-    res.status(400).json(invalidData || "Rating cannot be null!");
+    res.status(400).json(invalidData || "Score cannot be null!");
   } else {
     db.rating.create(rating).then((result) => {
       res.send(result);

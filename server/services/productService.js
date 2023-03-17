@@ -33,7 +33,6 @@ async function getById(id) {
     const allProducts = await db.product.findOne({
       where: { id },
       include: [
-        db.uniqueProduct,
         db.color,
         db.manufacturer,
         {
@@ -91,6 +90,26 @@ async function create(product) {
   }
 }
 
+async function addToCart(product, id, cartId) {
+  const invalidData = validate(product, constraints);
+
+  if (!id) {
+    return createResponseError(422, "ID is necessary when updating");
+  }
+  if (invalidData) {
+    return createResponseError(422, invalidData);
+  }
+  try {
+    const updatedProduct = { cartId: cartId };
+    await db.product.update(updatedProduct, {
+      where: { id },
+    });
+    return createResponseMessage(200, "The product was added to a cart");
+  } catch (error) {
+    return createResponseError(error.status, error.message);
+  }
+}
+
 async function update(product, id) {
   const invalidData = validate(product, constraints);
 
@@ -112,7 +131,7 @@ async function update(product, id) {
 
 async function destroy(id) {
   if (!id) {
-    return createResponseError(422, "ID is necessary when updating");
+    return createResponseError(422, "ID is necessary when deleting");
   }
   try {
     await db.product.destroy({
@@ -131,4 +150,5 @@ module.exports = {
   update,
   destroy,
   getByManufacturer,
+  addToCart,
 };

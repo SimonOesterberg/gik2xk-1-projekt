@@ -16,6 +16,8 @@ import { Link, useParams } from "react-router-dom";
 import { useEffect, useState } from "react";
 import { getOne } from "../models/ProductModel";
 import SettingsIcon from "@mui/icons-material/Settings";
+import NewRatingForm from "../components/NewRatingForm";
+import AddToCartButton from "../components/AddToCartButton";
 
 export default function ProductDetail() {
   const params = useParams();
@@ -29,20 +31,20 @@ export default function ProductDetail() {
     });
   }, [productId]);
 
+  const manufacturer = product.manufacturer;
+  const ratings = product.ratings;
+
   let averageScore = 0;
 
-  /* if (product && product.ratings.length > 0) {
+  if (product && ratings) {
+    console.log(ratings);
     let totalScore = 0;
-    product.ratings.forEach(function (rating) {
-      totalScore += rating;
+    ratings.forEach((rating) => {
+      totalScore += rating.score;
     });
 
-    averageScore = totalScore / product.ratings.length;
-  } */
-
-  const manufacturer = product.manufacturer;
-  const stock = product.uniqueProducts;
-  const ratings = product.ratings;
+    averageScore = totalScore / ratings.length;
+  }
 
   return product && manufacturer ? (
     <Grid
@@ -64,7 +66,7 @@ export default function ProductDetail() {
           <Typography variant="caption" component="p">
             <Rating
               name="avg-rating"
-              value={(averageScore / 10) * 5}
+              value={averageScore / 2}
               precision={0.5}
               readOnly
             />
@@ -109,7 +111,7 @@ export default function ProductDetail() {
               &nbsp;In Stock:&nbsp;
             </Typography>
             <Typography variant="string" component="p">
-              {stock.length}
+              {product.stock}
             </Typography>
           </Box>
           <Box className="ProductDetail__basic-info">
@@ -118,6 +120,9 @@ export default function ProductDetail() {
                 <SettingsIcon></SettingsIcon>
               </Link>
             </IconButton>
+          </Box>
+          <Box className="ProductDetail__basic-info">
+            <AddToCartButton></AddToCartButton>
           </Box>
         </Box>
       </Grid>
@@ -134,37 +139,7 @@ export default function ProductDetail() {
       <Grid item xs={6}>
         <Box className="Bottom-container">
           <Box className="ProductDetail__container">
-            <Typography variant="h4" component="h3">
-              Add a rating
-            </Typography>
-            <Box className="Rating__header">
-              <Grid className="Rating__image-container" item xs={6}>
-                <img
-                  className="Rating__image"
-                  src={
-                    "https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_1280.png"
-                  }
-                  alt="Profile"
-                ></img>
-                <Typography variant="string" component="p">
-                  Användarnamn
-                </Typography>
-              </Grid>
-              <Grid item xs={6} className="Rating__stars">
-                <Rating name="newRating" precision={0.5} />
-              </Grid>
-            </Box>
-            <Box component="form" noValidate autoComplete="off">
-              <TextField
-                label="Write a review"
-                variant="outlined"
-                multiline
-                className="Rating__textfield"
-              />
-            </Box>
-            <Box className="Rating__submit-container">
-              <Button variant="contained">Submit</Button>
-            </Box>
+            <NewRatingForm></NewRatingForm>
           </Box>
           <Box className="ProductDetail__container" mt={"1rem"}>
             <Typography

@@ -22,3 +22,25 @@ export async function getOne(id) {
     return {};
   }
 }
+
+export async function update(user) {
+  const result = await api.put(`/users/`, user);
+
+  if (result.status === 200) return result.data;
+  else {
+    console.log(result.status);
+    console.log(result.data);
+    return {};
+  }
+}
+
+export async function create(user) {
+  const result = await api.post(`/users/`, user);
+
+  if (result.status === 200) return result.data;
+  else {
+    console.log(result.status);
+    console.log(result.data);
+    return {};
+  }
+}

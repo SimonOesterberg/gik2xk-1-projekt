@@ -56,18 +56,13 @@ db.product.belongsTo(db.color, {
   foreignKey: { allowNull: false },
 });
 
-//product id
-db.product.hasMany(db.uniqueProduct, {
-  foreignKey: { allowNull: false },
+// id
+db.cart.hasMany(db.product, {
+  foreignKey: { allowNull: true },
 });
-db.uniqueProduct.belongsTo(db.product, {
-  foreignKey: { allowNull: false },
-  onDelete: "CASCADE",
+db.product.belongsTo(db.cart, {
+  foreignKey: { allowNull: true },
 });
-
-//uniqueProduct id
-db.cart.hasMany(db.uniqueProduct);
-db.uniqueProduct.belongsTo(db.cart);
 
 //user id
 db.user.hasOne(db.cart, {

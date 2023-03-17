@@ -9,15 +9,6 @@ router.get("/:id", (req, res) => {
   });
 });
 
-router.post("/:id/addUniqueProduct/:uniqueProductId", (req, res) => {
-  const uniqueProductId = req.params.uniqueProductId;
-  const id = req.params.id;
-
-  cartService.addUniqueProduct(id, uniqueProductId).then((result) => {
-    res.status(result.status).json(result.data);
-  });
-});
-
 router.get("/", (req, res) => {
   cartService.getAll().then((result) => {
     res.status(result.status).json(result.data);

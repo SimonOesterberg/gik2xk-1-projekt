@@ -38,7 +38,7 @@ async function getById(id) {
   try {
     const allCarts = await db.cart.findOne({
       where: { id },
-      include: [{ model: db.uniqueProduct, include: [db.product] }],
+      include: [db.product],
     });
     return createResponseSuccess(allCarts);
   } catch (error) {
@@ -50,24 +50,6 @@ async function getAll() {
   try {
     const allCarts = await db.cart.findAll();
     return createResponseSuccess(allCarts);
-  } catch (error) {
-    return createResponseError(error.status, error.message);
-  }
-}
-
-async function addUniqueProduct(id, uniqueProductId) {
-  if (!id) {
-    return createResponseError(422, "ID cannot be empty");
-  }
-  try {
-    const addedUniqueProduct = await db.uniqueProduct.update(
-      { cartId: id },
-      {
-        where: { id: uniqueProductId },
-      }
-    );
-
-    return createResponseSuccess(addedUniqueProduct);
   } catch (error) {
     return createResponseError(error.status, error.message);
   }
@@ -130,7 +112,6 @@ async function destroy(id) {
 module.exports = {
   getById,
   getAll,
-  addUniqueProduct,
   create,
   update,
   destroy,

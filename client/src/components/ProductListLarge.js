@@ -39,7 +39,6 @@ export default function ProductListLarge({ pathname }) {
 
           return (
             <ProductListItem
-              className="ThisIsClass"
               key={`productId_${product.id}`}
               item={product}
               cols={cols}

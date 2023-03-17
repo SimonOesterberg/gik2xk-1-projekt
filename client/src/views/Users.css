@@ -1,16 +1,17 @@
 .Box__User{
-    display: flex;
+    display: flex !important;
     width: 100%;
     justify-content: center;
     padding-top: 2rem;
+    align-items: center;
 }
 
-.User__Grid--container{
-    
+.User__form{
     width: 45%;
     background-color: rgba(169, 175, 175, 0.293);
     border-radius: 10px;
     background-color: rgba(245, 245, 245, 0.967);
+    
 
 }
 
@@ -24,9 +25,7 @@
     height: 4rem;
 }
 
-.Form__tf {
-    width: 100%;
-}
+
 
 
 

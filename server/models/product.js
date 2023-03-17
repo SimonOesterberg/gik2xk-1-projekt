@@ -7,6 +7,10 @@ module.exports = (sequelize, DataTypes) => {
         primaryKey: true,
         autoIncrement: true,
       },
+      stock: {
+        type: DataTypes.INTEGER(10),
+        allowNull: false,
+      },
       name: {
         type: DataTypes.STRING(30),
         allowNull: false,
@@ -16,7 +20,7 @@ module.exports = (sequelize, DataTypes) => {
         allowNull: false,
       },
       imageUrl: {
-        type: DataTypes.STRING(100),
+        type: DataTypes.STRING(1000),
         allowNull: false,
         validate: {
           isUrl: true,

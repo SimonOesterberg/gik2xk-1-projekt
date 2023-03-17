@@ -7,7 +7,7 @@ import { TextField } from "@mui/material";
 import SettingsIcon from "@mui/icons-material/Settings";
 import { IconButton } from "@mui/material";
 import { Link } from "react-router-dom";
-import { getOne } from "../models/UserModel";
+import { create, getOne, update } from "../models/UserModel";
 import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 
@@ -21,6 +21,7 @@ export default function UserEdit() {
     lastName: "",
     email: "",
     tel: "",
+    address: "",
     password: "",
     imageUrl: "",
   };
@@ -48,11 +49,17 @@ export default function UserEdit() {
     setUser(newUser);
   }
 
-  function onSave() {}
+  function onSave() {
+    if (user.id === 0) {
+      create(user).then(() => console.log("sparad"));
+    } else {
+      update(user).then(() => console.log("uppdaterad"));
+    }
+  }
 
   return (
     <Box className="Box__User">
-      <form>
+      <form className="User__form">
         <Box className="User__Grid--container">
           <Grid container spacing={2} className="Grid__User">
             <Grid item xs={5} md={5}>
@@ -80,7 +87,6 @@ export default function UserEdit() {
                 label="Username"
                 id="UserN"
                 variant="outlined"
-                multiline
                 onChange={onChange}
               />
             </Grid>
@@ -94,7 +100,6 @@ export default function UserEdit() {
                 label="Name"
                 id="Firstname"
                 variant="outlined"
-                multiline
                 onChange={onChange}
               />
             </Grid>
@@ -108,7 +113,6 @@ export default function UserEdit() {
                 label="Lastname"
                 id="Lastname"
                 variant="outlined"
-                multiline
                 onChange={onChange}
               />
             </Grid>
@@ -122,7 +126,6 @@ export default function UserEdit() {
                 name="email"
                 label="Email"
                 variant="outlined"
-                multiline
                 onChange={onChange}
               />
             </Grid>
@@ -136,7 +139,18 @@ export default function UserEdit() {
                 label="Tel"
                 id="Tel"
                 variant="outlined"
-                multiline
+                onChange={onChange}
+              />
+            </Grid>
+            <Grid item xs={5} md={5}>
+              address
+            </Grid>
+            <Grid item xs={5} md={5}>
+              <TextField
+                value={user.address}
+                name="address"
+                label="Address"
+                variant="outlined"
                 onChange={onChange}
               />
             </Grid>
@@ -150,7 +164,6 @@ export default function UserEdit() {
                 id="password"
                 label="Password"
                 variant="outlined"
-                multiline
                 onChange={onChange}
               />
             </Grid>
@@ -164,7 +177,6 @@ export default function UserEdit() {
                 id="imageUrl"
                 label="imgUrl"
                 variant="outlined"
-                multiline
                 onChange={onChange}
               />
             </Grid>
@@ -172,8 +184,8 @@ export default function UserEdit() {
               {""}
             </Grid>
             <Grid item xs={4} md={4}>
-              <IconButton className="btn" onClick={""}>
-                save
+              <IconButton aria-label="Edit product" onMouseDown={onSave}>
+                <Link to={`/users/${user.id}`}> Save </Link>
               </IconButton>
             </Grid>
           </Grid>

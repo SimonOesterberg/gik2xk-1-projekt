@@ -12,7 +12,7 @@ module.exports = (sequelize, DataTypes) => {
         allowNull: false,
       },
       logoUrl: {
-        type: DataTypes.STRING(100),
+        type: DataTypes.STRING(1000),
         allowNull: true,
         validate: {
           isUrl: true,

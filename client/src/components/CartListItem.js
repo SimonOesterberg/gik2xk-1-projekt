@@ -1,25 +1,36 @@
 import { Typography } from "@mui/material";
 import { Box } from "@mui/system";
-import DeleteIcon from "@mui/icons-material/Delete";
 import { TextField } from "@mui/material";
+import DeleteFromCartButton from "./DeleteFromCartButton";
 
-export default function CartListItem(product) {
-  console.log(product);
+export default function CartListItem({ product }) {
   return (
     <>
-      <li className="CartList__item">
-        <Box>
-          <Typography variant="p" component="p">
-            {product.product.name}
-          </Typography>
+      <li className="CartList__item" key={product.id}>
+        <Box display={"flex"} alignItems={"center"}>
+          <Box height={"5vh"} mr={"1rem"} style={{ aspectRatio: "1/1" }}>
+            <img src={product.imageUrl} alt="product" height={"100%"} />
+          </Box>
+          <Box>
+            <Typography variant="p" component="p">
+              {product.name}
+            </Typography>
+          </Box>
         </Box>
         <Box className="CartList__item-right">
+          <Box style={{ marginRight: "1rem" }}>
+            <Typography variant="p" component="p">
+              {product.price * product.stock}kr
+            </Typography>
+          </Box>
           <input
             className="CartList__item-amount"
             type={"number"}
-            value={product.product.amount}
+            value={product.stock}
+            style={{ marginRight: "1rem" }}
           ></input>
-          <DeleteIcon></DeleteIcon>
+
+          <DeleteFromCartButton productId={product.id}></DeleteFromCartButton>
         </Box>
       </li>
     </>

@@ -1,8 +1,23 @@
 import * as React from "react";
 import ImageList from "@mui/material/ImageList";
 import ProductListItem from "./ProductListItem";
+import { useEffect, useState } from "react";
+import { getAll } from "../models/ProductModel";
+import Products from "../views/Products";
 
-export default function ProductListSmall() {
+export default function ProductListSmall({ pathname }) {
+  const [products, setProducts] = useState([]);
+
+  useEffect(() => {
+    getAll(pathname).then((products) => setProducts(products));
+  }, [pathname]);
+
+  let newProducts = JSON.stringify(products.data);
+
+  if (newProducts) {
+    newProducts = JSON.parse(newProducts);
+  }
+
   return (
     <ImageList
       className="ProductListSmall"
@@ -14,12 +29,20 @@ export default function ProductListSmall() {
       gap={1}
       cols={2}
     >
-      {itemData.map((item) => {
-        const cols = 1;
-        const rows = 1;
+      {newProducts &&
+        newProducts.map((product) => {
+          const cols = 1;
+          const rows = 1;
 
-        return <ProductListItem item={item} cols={cols} rows={rows} />;
-      })}
+          return (
+            <ProductListItem
+              key={`productId_${product.id}`}
+              item={product}
+              cols={cols}
+              rows={rows}
+            />
+          );
+        })}
     </ImageList>
   );
 }

@@ -11,7 +11,7 @@ const constraints = {
   },
   logoUrl: {
     length: {
-      maximum: 100,
+      maximum: 1000,
       tooLong: "^URL cannot be longer than %{count} characters long!",
     },
   },
