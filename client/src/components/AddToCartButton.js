@@ -1,18 +1,20 @@
-import { Button, Typography } from "@mui/material";
+import { Button, TextField, Typography } from "@mui/material";
 import AddShoppingCartIcon from "@mui/icons-material/AddShoppingCart";
-import { addToCart } from "../models/ProductModel";
+import { update } from "../models/ProductModel";
 import { useParams } from "react-router-dom";
 
-export default function AddToCartButton() {
+export default function AddToCartButton({ product }) {
   const params = useParams();
   const productId = params.id;
 
-  const product = {
-    id: productId,
-  };
-
   function onAdd() {
-    addToCart(product).then(() => console.log("tillagd"));
+    const amount = document.getElementById("inCart").value;
+
+    update({
+      id: productId,
+      cartId: 1,
+      inCart: amount,
+    }).then(() => console.log("tillagd"));
   }
 
   return (
@@ -21,6 +23,14 @@ export default function AddToCartButton() {
         <AddShoppingCartIcon></AddShoppingCartIcon>
         <Typography> &nbsp; Add to cart</Typography>
       </Button>
+      <TextField
+        name="inCart"
+        label="amount"
+        id="inCart"
+        type="number"
+        required
+        InputProps={{ inputProps: { min: 0, max: product.stock } }}
+      ></TextField>
     </>
   );
 }

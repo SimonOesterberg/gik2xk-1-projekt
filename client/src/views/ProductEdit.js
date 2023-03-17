@@ -5,7 +5,7 @@ import { create, destroy, getOne, update } from "../models/ProductModel";
 import { useEffect, useState } from "react";
 
 import "./ProductEdit.css";
-import { useParams } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 
 export default function ProductEdit() {
   const params = useParams();
@@ -158,16 +158,34 @@ export default function ProductEdit() {
             rows={4}
             style={{ width: "98%" }}
           />
-          <Button variant="filled" onMouseDown={onSave}>
-            Spara
-          </Button>
-          <Button variant="filled" onMouseDown={onDelete}>
-            Delete
-          </Button>
+          <Link to={`/products/${product.id}`}>
+            <Button
+              variant="filled"
+              onMouseDown={onSave}
+              style={{ color: "black" }}
+            >
+              Spara
+            </Button>
+          </Link>
+          <Link to={`/products/${product.id}`}>
+            <Button
+              variant="filled"
+              onMouseDown={onDelete}
+              style={{ color: "black" }}
+            >
+              Delete
+            </Button>
+          </Link>
         </Box>
       </Grid>
       <Grid item xs></Grid>
     </Grid> /* : (
+    <Typography>The product you're trying to edit doesn't exist</Typography>
+  )*/
+    /*: (
+    <Typography>The product you're trying to edit doesn't exist</Typography>
+  )*/
+    /*: (
     <Typography>The product you're trying to edit doesn't exist</Typography>
   )*/
     /*: (

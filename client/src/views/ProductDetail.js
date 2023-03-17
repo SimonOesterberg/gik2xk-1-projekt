@@ -122,7 +122,7 @@ export default function ProductDetail() {
             </IconButton>
           </Box>
           <Box className="ProductDetail__basic-info">
-            <AddToCartButton></AddToCartButton>
+            <AddToCartButton product={product}></AddToCartButton>
           </Box>
         </Box>
       </Grid>

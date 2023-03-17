@@ -55,13 +55,3 @@ export async function destroy(product) {
     return {};
   }
 }
-export async function addToCart(product) {
-  const result = await api.put(`/products/addToCart/1`, product);
-
-  if (result.status === 200) return result.data;
-  else {
-    console.log(result.status);
-    console.log(result.data);
-    return {};
-  }
-}

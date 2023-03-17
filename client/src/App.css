@@ -1,7 +1,13 @@
 .App {
   text-align: left;
+}
+
+body, html {
+  min-height: 100vh;
+}
+
+body {
   background-image: url(https://images.pexels.com/photos/207253/pexels-photo-207253.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2);
-  
 }
 
 a {

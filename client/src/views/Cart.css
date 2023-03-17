@@ -46,3 +46,23 @@
     border-radius: 5px;
     text-align: center;
 }
+
+.Payment__container {
+    border-radius: 5px;
+}
+.Payment__container ul{
+    list-style-type: none;
+    gap: 1rem;
+    
+    
+
+}
+
+.Payment__container li{
+    border: solid black 2px;
+    width: 50%;
+    padding: .5rem;
+    margin: .3rem;
+
+
+}

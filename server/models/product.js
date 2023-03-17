@@ -11,6 +11,10 @@ module.exports = (sequelize, DataTypes) => {
         type: DataTypes.INTEGER(10),
         allowNull: false,
       },
+      inCart: {
+        type: DataTypes.INTEGER(10),
+        allowNull: true,
+      },
       name: {
         type: DataTypes.STRING(30),
         allowNull: false,
