@@ -10,6 +10,7 @@ import UserEdit from "./views/UserEdit";
 import Wishlist from "./views/Wishlist";
 import CreateProduct from "./views/ProductEdit";
 import { getAll } from "./models/ProductModel";
+import Dropdown from "./components/Dropdown";
 
 import { styled, alpha } from "@mui/material/styles";
 import AppBar from "@mui/material/AppBar";
@@ -89,17 +90,9 @@ function App({ pathname }) {
       <Box sx={{ flexGrow: 1 }}>
         <AppBar position="static">
           <Toolbar className="App__toolbar">
-            <IconButton
-              size="large"
-              edge="start"
-              color="white"
-              aria-label="open drawer"
-              sx={{ mr: 2 }}
-            >
-              <Link to="/products">
-                <MenuIcon />
-              </Link>
-            </IconButton>
+          <Dropdown>
+
+          </Dropdown>
 
             <Typography
               variant="h6"
