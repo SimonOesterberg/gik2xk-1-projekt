@@ -1,2 +1,1 @@
--Fokusera på att se på videor! Resten får komma sen. 
--Gör klart resten!
+Fixa bugg i productdetail. Går inte att j
