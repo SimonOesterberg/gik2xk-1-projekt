@@ -43,11 +43,25 @@ async function getById(id) {
     return createResponseError(422, "ID cannot be empty");
   }
   try {
-    const allUsers = await db.user.findOne({
+    const user = await db.user.findOne({
       where: { id },
       include: [{ model: db.rating }],
     });
-    return createResponseSuccess(allUsers);
+    return createResponseSuccess(user);
+  } catch (error) {
+    return createResponseError(error.status, error.message);
+  }
+}
+
+async function getByUsername(username) {
+  if (!username) {
+    return createResponseError(422, "Username cannot be empty");
+  }
+  try {
+    const user = await db.user.findOne({
+      where: { userName: username },
+    });
+    return createResponseSuccess(user);
   } catch (error) {
     return createResponseError(error.status, error.message);
   }
@@ -141,4 +155,5 @@ module.exports = {
   create,
   update,
   destroy,
+  getByUsername,
 };

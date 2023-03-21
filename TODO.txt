@@ -1,1 +1,1 @@
-Fixa bugg i productdetail. Går inte att j
+Fixa bugg i productdetail. Går inte att jämföra strängar så kan inte kolla om username = admin

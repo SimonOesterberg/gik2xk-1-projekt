@@ -1,14 +1,11 @@
-import { Box, textFieldClasses } from "@mui/material";
-import Grid from "@mui/material/Grid";
-import "./Users.css";
 import PersonIcon from "@mui/icons-material/Person";
-import { TextField } from "@mui/material";
 import SettingsIcon from "@mui/icons-material/Settings";
-import { IconButton } from "@mui/material";
-import { Link } from "react-router-dom";
-import { create, getOne, update } from "../models/UserModel";
+import { Box, IconButton, TextField } from "@mui/material";
+import Grid from "@mui/material/Grid";
 import { useEffect, useState } from "react";
-import { useParams } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
+import { getOne } from "../models/UserModel";
+import "./Users.css";
 
 function User() {
   const params = useParams();

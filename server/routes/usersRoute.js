@@ -9,6 +9,14 @@ router.get("/:id", (req, res) => {
   });
 });
 
+router.get("/login/:username", (req, res) => {
+  const username = req.params.username;
+
+  userService.getByUsername(username).then((result) => {
+    res.status(result.status).json(result.data);
+  });
+});
+
 router.get("/", (req, res) => {
   userService.getAll().then((result) => {
     res.status(result.status).json(result.data);

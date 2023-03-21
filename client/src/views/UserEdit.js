@@ -1,15 +1,10 @@
-import User from "./User";
-import { Box, textFieldClasses } from "@mui/material";
-import Grid from "@mui/material/Grid";
-import "./Users.css";
 import PersonIcon from "@mui/icons-material/Person";
-import { TextField } from "@mui/material";
-import SettingsIcon from "@mui/icons-material/Settings";
-import { IconButton } from "@mui/material";
-import { Link } from "react-router-dom";
-import { create, getOne, update } from "../models/UserModel";
+import { Box, IconButton, TextField } from "@mui/material";
+import Grid from "@mui/material/Grid";
 import { useEffect, useState } from "react";
-import { useParams } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
+import { create, getOne, update } from "../models/UserModel";
+import "./Users.css";
 
 export default function UserEdit() {
   const params = useParams();
@@ -51,7 +46,7 @@ export default function UserEdit() {
 
   function onSave() {
     if (user.id === 0) {
-      create(user).then(() => console.log("sparad"));
+      create(user).then(() => console.log("sparad"), window.location.reload());
     } else {
       update(user).then(() => console.log("uppdaterad"));
     }
@@ -91,7 +86,7 @@ export default function UserEdit() {
               />
             </Grid>
             <Grid item xs={5} md={5}>
-              firstname
+              Firstname
             </Grid>
             <Grid item xs={5} md={5}>
               <TextField
@@ -185,7 +180,13 @@ export default function UserEdit() {
             </Grid>
             <Grid item xs={4} md={4}>
               <IconButton aria-label="Edit product" onMouseDown={onSave}>
-                <Link to={`/users/${user.id}`}> Save </Link>
+                <Link
+                  to={`/users/${user.id}`}
+                  style={{ color: "black", textDecoration: "none" }}
+                >
+                  {" "}
+                  Save{" "}
+                </Link>
               </IconButton>
             </Grid>
           </Grid>

@@ -1,8 +1,9 @@
+import InfoIcon from "@mui/icons-material/Info";
+import StarBorderIcon from "@mui/icons-material/StarBorder";
+import { Box } from "@mui/material";
+import IconButton from "@mui/material/IconButton";
 import ImageListItem from "@mui/material/ImageListItem";
 import ImageListItemBar from "@mui/material/ImageListItemBar";
-import IconButton from "@mui/material/IconButton";
-import StarBorderIcon from "@mui/icons-material/StarBorder";
-import InfoIcon from "@mui/icons-material/Info";
 import { Link } from "react-router-dom";
 
 function srcset(image, width, height, rows, cols) {
@@ -31,24 +32,33 @@ function ProductListItem({ item, cols, rows }) {
           }}
           title={item.name}
           position="top"
-          style={{ display: "flex", alignItems: "center" }}
           actionIcon={
-            <>
-              <IconButton
-                sx={{ color: "white" }}
-                aria-label={`info ${item.name}`}
-              >
-                <Link to={`/products/${item.id}`}>
-                  <InfoIcon />
-                </Link>
-              </IconButton>
+            <Box
+              style={{
+                display: "flex",
+                alignItems: "center",
+              }}
+            >
               <IconButton
                 sx={{ color: "white" }}
                 aria-label={`star ${item.name}`}
+                style={{ display: "flex", alignItems: "center" }}
               >
                 <StarBorderIcon />
               </IconButton>
-            </>
+              <IconButton
+                sx={{ color: "white" }}
+                aria-label={`info ${item.name}`}
+                style={{ display: "flex", alignItems: "center" }}
+              >
+                <Link
+                  to={`/products/${item.id}`}
+                  style={{ display: "flex", alignItems: "center" }}
+                >
+                  <InfoIcon />
+                </Link>
+              </IconButton>
+            </Box>
           }
           actionPosition="right"
         />

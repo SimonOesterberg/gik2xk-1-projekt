@@ -1,32 +1,32 @@
+import { Link, Route, Routes } from "react-router-dom";
 import "./App.css";
-import { Routes, Route, Link } from "react-router-dom";
-import Home from "./views/Home";
+import Dropdown from "./components/Dropdown";
 import Cart from "./views/Cart";
+import Home from "./views/Home";
 import ProductDetail from "./views/ProductDetail";
 import ProductEdit from "./views/ProductEdit";
 import Products from "./views/Products";
 import User from "./views/User";
 import UserEdit from "./views/UserEdit";
+import UserLogin from "./views/UserLogin";
 import Wishlist from "./views/Wishlist";
-import CreateProduct from "./views/ProductEdit";
-import { getAll } from "./models/ProductModel";
-import Dropdown from "./components/Dropdown";
 
-import { styled, alpha } from "@mui/material/styles";
-import AppBar from "@mui/material/AppBar";
-import Box from "@mui/material/Box";
-import Toolbar from "@mui/material/Toolbar";
-import IconButton from "@mui/material/IconButton";
-import Typography from "@mui/material/Typography";
-import InputBase from "@mui/material/InputBase";
-import MenuIcon from "@mui/icons-material/Menu";
+import AddIcon from "@mui/icons-material/Add";
+import PersonIcon from "@mui/icons-material/Person";
 import SearchIcon from "@mui/icons-material/Search";
 import ShoppingCartIcon from "@mui/icons-material/ShoppingCart";
-import PersonIcon from "@mui/icons-material/Person";
 import StarIcon from "@mui/icons-material/Star";
-import AddIcon from "@mui/icons-material/Add";
-import { Grid } from "@mui/material";
+import { Avatar, Grid } from "@mui/material";
+import AppBar from "@mui/material/AppBar";
+import Box from "@mui/material/Box";
+import IconButton from "@mui/material/IconButton";
+import InputBase from "@mui/material/InputBase";
+import { alpha, styled } from "@mui/material/styles";
+import Toolbar from "@mui/material/Toolbar";
+import Typography from "@mui/material/Typography";
 import { useEffect, useState } from "react";
+import { getOne } from "./models/UserModel";
+import Manufacturer from "./views/Manufacturers";
 
 const Search = styled("div")(({ theme }) => ({
   position: "relative",
@@ -70,29 +70,36 @@ const StyledInputBase = styled(InputBase)(({ theme }) => ({
   },
 }));
 
+function logOut() {
+  localStorage.clear();
+  window.location.reload();
+}
+
 function App({ pathname }) {
   const [products, setProducts] = useState([]);
   const filteredList = [];
 
+  let defaultUser = null;
+
+  const [loggedInUser, setLoggedInUser] = useState({ defaultUser });
+
   useEffect(() => {
-    getAll(pathname).then((products) => setProducts(products));
-  }, [pathname]);
-
-  let newProducts = JSON.stringify(products.data);
-
-  if (newProducts) {
-    newProducts = JSON.parse(newProducts);
-    filteredList.push(newProducts);
-  }
+    if (localStorage.loggedInUser) {
+      getOne(localStorage.loggedInUser).then((user) => {
+        setLoggedInUser(user);
+        console.log(user);
+      });
+    } else {
+      setLoggedInUser(defaultUser);
+    }
+  }, []);
 
   return (
     <div className="App">
       <Box sx={{ flexGrow: 1 }}>
         <AppBar position="static">
           <Toolbar className="App__toolbar">
-          <Dropdown>
-
-          </Dropdown>
+            <Dropdown></Dropdown>
 
             <Typography
               variant="h6"
@@ -100,7 +107,16 @@ function App({ pathname }) {
               component="div"
               sx={{ flexGrow: 1, display: { xs: "none", sm: "block" } }}
             >
-              <Link to="/">Color Shop</Link>
+              <Link
+                to="/"
+                className="Links"
+                style={{ display: "flex", alignItems: "center" }}
+              >
+                <img
+                  style={{ height: "5vh", padding: "1rem" }}
+                  src="https://imgur.com/7jtB5bl.jpg"
+                ></img>
+              </Link>
             </Typography>
 
             <Search>
@@ -114,106 +130,130 @@ function App({ pathname }) {
               />
             </Search>
 
-            <IconButton sx={{ color: "white" }} aria-label={`Wishlist`}>
-              <Link to="/products/new">
-                <AddIcon />
-              </Link>
-            </IconButton>
+            {loggedInUser !== null && loggedInUser.userName === "Admin" && (
+              <IconButton sx={{ color: "white" }} aria-label={`Wishlist`}>
+                <Link to="/products/new" className="Links">
+                  <AddIcon />
+                </Link>
+              </IconButton>
+            )}
 
-            <IconButton sx={{ color: "white" }} aria-label={"Go to profile"}>
-              <Link to="/users/new">
-                <PersonIcon />
+            {(loggedInUser === null && (
+              <IconButton sx={{ color: "white" }} aria-label={"Go to profile"}>
+                <Link to={`/users/new`} className="Links">
+                  <PersonIcon />
+                </Link>
+              </IconButton>
+            )) || (
+              <Link
+                to={`/users/${loggedInUser.id}`}
+                className="Links"
+                style={{
+                  display: "flex",
+                  alignItems: "center",
+                  backgroundColor: "#0e335c",
+                  borderRadius: "5px",
+                  padding: ".5rem 1rem",
+                }}
+              >
+                <Avatar
+                  alt="Profile"
+                  src={loggedInUser.imageUrl}
+                  style={{ marginRight: ".5rem" }}
+                />
+                <Typography variant="h6">{loggedInUser.userName}</Typography>
               </Link>
-            </IconButton>
+            )}
+
+            {(loggedInUser === null && (
+              <IconButton aria-label="Log in">
+                <Link to="/user/login" className="Links">
+                  Logga in
+                </Link>
+              </IconButton>
+            )) || (
+              <IconButton
+                aria-label="Log in"
+                className="Links"
+                onClick={logOut}
+              >
+                Logga ut
+              </IconButton>
+            )}
 
             <IconButton sx={{ color: "white" }} aria-label={`Wishlist`}>
-              <Link to="/wishlists/1">
+              <Link to="/wishlists/1" className="Links">
                 <StarIcon />
               </Link>
             </IconButton>
 
             <IconButton aria-label="Go to shopping cart">
-              <Link to="/carts/1">
+              <Link to="/carts/1" className="Links">
                 <ShoppingCartIcon />
               </Link>
             </IconButton>
           </Toolbar>
         </AppBar>
       </Box>
-      <Grid container columnSpacing={5} rowSpacing={2} mt={"0"}>
-        <Grid item xs={2}>
-          <Box className="app__navbar">
-            <ul className="navbar__ul" style={{ liststyletype: "none" }}>
-              <li className="navbar__ul--li">
-                <Link to={"/"}> Products</Link>
-              </li>
-              <li className="navbar__ul--li">
-                {" "}
-                <Link to={"/"}> Products</Link>
-              </li>
-              <li className="navbar__ul--li">
-                {" "}
-                <Link to={"/"}> Products</Link>
-              </li>
-              <li className="navbar__ul--li">
-                {" "}
-                <Link to={"/"}> Products</Link>
-              </li>
-            </ul>
-          </Box>
-        </Grid>
-        <Grid item xs={9}>
-          <Routes>
-            <Route exact path="/" element={<Home></Home>}></Route>
-            <Route exact path="/users/:id" element={<User></User>}></Route>
-            <Route exact path="/carts/:id" element={<Cart></Cart>}></Route>
-            <Route
-              exact
-              path="/products"
-              element={<Products></Products>}
-            ></Route>
-            <Route
-              exact
-              path="/users/:id"
-              element={<UserEdit></UserEdit>}
-            ></Route>
-            <Route
-              exact
-              path="/users/:id/edit"
-              element={<UserEdit></UserEdit>}
-            ></Route>
-            <Route
-              exact
-              path="/users/new"
-              element={<UserEdit></UserEdit>}
-            ></Route>
-            <Route
-              exact
-              path="/wishlists/:id"
-              element={<Wishlist></Wishlist>}
-            ></Route>
-            <Route
-              exact
-              path="/products/:id"
-              element={<ProductDetail></ProductDetail>}
-            ></Route>
-            <Route
-              exact
-              path="/products/new"
-              element={<ProductEdit></ProductEdit>}
-            ></Route>
-            <Route
-              exact
-              path="/products/:id/edit"
-              element={<ProductEdit></ProductEdit>}
-            ></Route>
-            <Route
-              exact
-              path="/products/manufacturer/:id"
-              element={<Products></Products>}
-            ></Route>
-          </Routes>
-        </Grid>
+      <Grid item xs={9}>
+        <Routes>
+          <Route exact path="/" element={<Home></Home>}></Route>
+          <Route exact path="/users/:id" element={<User></User>}></Route>
+          <Route exact path="/carts/:id" element={<Cart></Cart>}></Route>
+          <Route exact path="/products" element={<Products></Products>}></Route>
+          <Route exact path="/" element={<UserLogin></UserLogin>}></Route>
+          <Route
+            exact
+            path="/users/:id"
+            element={<UserEdit></UserEdit>}
+          ></Route>
+          <Route
+            exact
+            path="/users/:id/edit"
+            element={<UserEdit></UserEdit>}
+          ></Route>
+          <Route
+            exact
+            path="/users/new"
+            element={<UserEdit></UserEdit>}
+          ></Route>
+          <Route
+            exact
+            path="/wishlists/:id"
+            element={<Wishlist></Wishlist>}
+          ></Route>
+          <Route
+            exact
+            path="/products/:id"
+            element={<ProductDetail></ProductDetail>}
+          ></Route>
+          <Route
+            exact
+            path="/products/new"
+            element={<ProductEdit></ProductEdit>}
+          ></Route>
+          <Route
+            exact
+            path="/products/:id/edit"
+            element={<ProductEdit></ProductEdit>}
+          ></Route>
+          <Route
+            exact
+            path="/products/manufacturer/:id"
+            element={<Products></Products>}
+          ></Route>
+          <Route
+            exact
+            path="/manufacturers"
+            element={<Manufacturer></Manufacturer>}
+          ></Route>
+
+          <Route
+            exact
+            path="/user/login"
+            element={<UserLogin></UserLogin>}
+          ></Route>
+        </Routes>
       </Grid>
     </div>
   );

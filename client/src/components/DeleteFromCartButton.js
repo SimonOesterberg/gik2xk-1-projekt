@@ -9,7 +9,9 @@ export default function DeleteFromCartButton({ productId }) {
   };
 
   function onDelete() {
-    update(product).then(() => console.log("borttagen"));
+    update(product)
+      .then(() => window.location.reload(true))
+      .then(() => console.log("borttagen"));
   }
 
   return (

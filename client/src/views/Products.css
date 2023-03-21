@@ -3,7 +3,7 @@ html {
 }
 
 
-.Grid__Product{
+.Grid{
     display: flex;
     align-items: center;
     justify-content: center;

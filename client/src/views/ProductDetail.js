@@ -1,23 +1,16 @@
-import {
-  Rating,
-  Typography,
-  Box,
-  TextField,
-  Button,
-  IconButton,
-} from "@mui/material";
-import Grid from "@mui/material/Grid";
-import "./ProductDetail.css";
-import LocalShippingIcon from "@mui/icons-material/LocalShipping";
-import InventoryIcon from "@mui/icons-material/Inventory";
 import FactoryIcon from "@mui/icons-material/Factory";
-import ProductRating from "../components/ProductRating";
-import { Link, useParams } from "react-router-dom";
-import { useEffect, useState } from "react";
-import { getOne } from "../models/ProductModel";
+import InventoryIcon from "@mui/icons-material/Inventory";
+import LocalShippingIcon from "@mui/icons-material/LocalShipping";
 import SettingsIcon from "@mui/icons-material/Settings";
-import NewRatingForm from "../components/NewRatingForm";
+import { Box, IconButton, Rating, Typography } from "@mui/material";
+import Grid from "@mui/material/Grid";
+import { useEffect, useState } from "react";
+import { Link, useParams } from "react-router-dom";
 import AddToCartButton from "../components/AddToCartButton";
+import NewRatingForm from "../components/NewRatingForm";
+import ProductRating from "../components/ProductRating";
+import { getOne } from "../models/ProductModel";
+import "./ProductDetail.css";
 
 export default function ProductDetail() {
   const params = useParams();
@@ -46,6 +39,20 @@ export default function ProductDetail() {
     averageScore = totalScore / ratings.length;
   }
 
+  let defaultUser = null;
+
+  const [loggedInUser, setLoggedInUser] = useState({ defaultUser });
+
+  useEffect(() => {
+    if (localStorage.loggedInUser) {
+      getOne(localStorage.loggedInUser).then((user) => {
+        setLoggedInUser(user);
+      });
+    } else {
+      setLoggedInUser(defaultUser);
+    }
+  }, []);
+
   return product && manufacturer ? (
     <Grid
       container
@@ -62,6 +69,13 @@ export default function ProductDetail() {
         <Box className="ProductDetail__basic-info-container ProductDetail__container">
           <Typography variant="h3" component="h2">
             {product.name}
+            {loggedInUser !== null && loggedInUser.id === 3 && (
+              <IconButton aria-label="Edit product">
+                <Link to={`/products/${product.id}/edit`}>
+                  <SettingsIcon style={{ color: "black" }}></SettingsIcon>
+                </Link>
+              </IconButton>
+            )}
           </Typography>
           <Typography variant="caption" component="p">
             <Rating
@@ -115,13 +129,6 @@ export default function ProductDetail() {
             </Typography>
           </Box>
           <Box className="ProductDetail__basic-info">
-            <IconButton aria-label="Edit product">
-              <Link to={`/products/${product.id}/edit`}>
-                <SettingsIcon></SettingsIcon>
-              </Link>
-            </IconButton>
-          </Box>
-          <Box className="ProductDetail__basic-info">
             <AddToCartButton product={product}></AddToCartButton>
           </Box>
         </Box>
@@ -139,7 +146,18 @@ export default function ProductDetail() {
       <Grid item xs={6}>
         <Box className="Bottom-container">
           <Box className="ProductDetail__container">
-            <NewRatingForm></NewRatingForm>
+            <Typography
+              variant="h4"
+              component="h3"
+              className="UserRatings__header"
+            >
+              Add a rating
+            </Typography>
+            {(localStorage.loggedInUser && <NewRatingForm></NewRatingForm>) || (
+              <Typography variant="paragraph" component="p">
+                You need to be logged in to add a rating.
+              </Typography>
+            )}
           </Box>
           <Box className="ProductDetail__container" mt={"1rem"}>
             <Typography
