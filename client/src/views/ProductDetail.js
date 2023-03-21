@@ -10,6 +10,7 @@ import AddToCartButton from "../components/AddToCartButton";
 import NewRatingForm from "../components/NewRatingForm";
 import ProductRating from "../components/ProductRating";
 import { getOne } from "../models/ProductModel";
+import { getOne as getOneUser } from "../models/UserModel";
 import "./ProductDetail.css";
 
 export default function ProductDetail() {
@@ -45,7 +46,7 @@ export default function ProductDetail() {
 
   useEffect(() => {
     if (localStorage.loggedInUser) {
-      getOne(localStorage.loggedInUser).then((user) => {
+      getOneUser(localStorage.loggedInUser).then((user) => {
         setLoggedInUser(user);
       });
     } else {
@@ -69,7 +70,8 @@ export default function ProductDetail() {
         <Box className="ProductDetail__basic-info-container ProductDetail__container">
           <Typography variant="h3" component="h2">
             {product.name}
-            {loggedInUser !== null && loggedInUser.id === 3 && (
+            {console.log("User:" + loggedInUser)}
+            {loggedInUser !== null && loggedInUser.userName === "Admin" && (
               <IconButton aria-label="Edit product">
                 <Link to={`/products/${product.id}/edit`}>
                   <SettingsIcon style={{ color: "black" }}></SettingsIcon>
