@@ -168,18 +168,18 @@ function App({ pathname }) {
             )}
 
             {(loggedInUser === null && (
-              <IconButton aria-label="Log in">
+              <IconButton aria-label="Sign in">
                 <Link to="/user/login" className="Links">
-                  Logga in
+                  Sign in
                 </Link>
               </IconButton>
             )) || (
               <IconButton
-                aria-label="Log out"
+                aria-label="Sign out"
                 className="Links"
                 onClick={logOut}
               >
-                Logga ut
+                Sign out
               </IconButton>
             )}
 
