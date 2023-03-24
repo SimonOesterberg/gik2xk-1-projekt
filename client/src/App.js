@@ -1,8 +1,13 @@
-import { Link, Route, Routes } from "react-router-dom";
 import "./App.css";
+
+import { useEffect, useState } from "react";
+import { Link, Route, Routes } from "react-router-dom";
+import { getOne } from "./models/UserModel";
+
 import Dropdown from "./components/Dropdown";
 import Cart from "./views/Cart";
 import Home from "./views/Home";
+import Manufacturer from "./views/Manufacturers";
 import ProductDetail from "./views/ProductDetail";
 import ProductEdit from "./views/ProductEdit";
 import Products from "./views/Products";
@@ -24,9 +29,6 @@ import InputBase from "@mui/material/InputBase";
 import { alpha, styled } from "@mui/material/styles";
 import Toolbar from "@mui/material/Toolbar";
 import Typography from "@mui/material/Typography";
-import { useEffect, useState } from "react";
-import { getOne } from "./models/UserModel";
-import Manufacturer from "./views/Manufacturers";
 
 const Search = styled("div")(({ theme }) => ({
   position: "relative",
@@ -173,7 +175,7 @@ function App({ pathname }) {
               </IconButton>
             )) || (
               <IconButton
-                aria-label="Log in"
+                aria-label="Log out"
                 className="Links"
                 onClick={logOut}
               >

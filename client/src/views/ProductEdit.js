@@ -1,11 +1,11 @@
 import { Button, Grid, Typography } from "@mui/material";
 import Box from "@mui/material/Box";
 import TextField from "@mui/material/TextField";
-import { create, destroy, getOne, update } from "../models/ProductModel";
 import { useEffect, useState } from "react";
+import { create, destroy, getOne, update } from "../models/ProductModel";
 
-import "./ProductEdit.css";
 import { Link, useParams } from "react-router-dom";
+import "./ProductEdit.css";
 
 export default function ProductEdit() {
   const params = useParams();
@@ -158,7 +158,7 @@ export default function ProductEdit() {
             rows={4}
             style={{ width: "98%" }}
           />
-          <Link to={`/products/${product.id}`}>
+          <Link to={`/products/`}>
             <Button
               variant="filled"
               onMouseDown={onSave}
@@ -167,7 +167,7 @@ export default function ProductEdit() {
               Spara
             </Button>
           </Link>
-          <Link to={`/products/${product.id}`}>
+          <Link to={`/products/`}>
             <Button
               variant="filled"
               onMouseDown={onDelete}
@@ -180,6 +180,9 @@ export default function ProductEdit() {
       </Grid>
       <Grid item xs></Grid>
     </Grid> /* : (
+    <Typography>The product you're trying to edit doesn't exist</Typography>
+  )*/
+    /*: (
     <Typography>The product you're trying to edit doesn't exist</Typography>
   )*/
     /*: (

@@ -24,20 +24,20 @@ function Home() {
   }, []);
 
   const quotes = [
-    "Sätt färg på dina drömmar ",
-    "Ge ditt liv lite mer färg ",
+    "Set color to your dreams ",
+    "Give your life some more colors ",
     "lorem ipsum ",
-    "Färga ditt liv ",
+    "Make a color post request to your life ",
     "Me gusta paella ",
     "Carpe diem ",
-    "Ge ditt liv lite mer färg ",
+    "Live every day as if it was your last ",
     "lorem ipsum ",
-    "Färga ditt liv ",
-    "Me gusta paella ",
+    "Live laugh love ",
+    "Have a nice day ",
   ];
 
   const quoteGen = () => {
-    const rnr = Math.floor(Math.random() * 10);
+    const rnr = Math.floor(Math.random() * quotes.length);
     return quotes[rnr];
   };
 

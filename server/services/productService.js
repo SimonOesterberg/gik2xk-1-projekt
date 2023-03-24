@@ -68,6 +68,7 @@ async function getByManufacturer(id) {
     return createResponseError(error.status, error.message);
   }
 }
+
 async function create(product) {
   const invalidData = validate(product, constraints);
   const name = product.name;
